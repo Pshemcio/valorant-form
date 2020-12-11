@@ -7,38 +7,57 @@
     <title>Form Validation</title>
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Montserrat:wght@300;500;600&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <div class="wrap">
-        <form id="form" class="form">
-            <h2>Zarejestruj się!</h2>
-            <div class="form-control">
-                <label for="username">Imię:</label>
-                <input type="text" id="username" placeholder="Wpisz imię">
-                <small>Error message</small>
-            </div>
-            <div class="form-control">
-                <label for="email">Email:</label>
-                <input type="text" id="email" placeholder="Wpisz email">
-                <small>Error message</small>
-            </div>
-            <div class="form-control">
-                <label for="password">Hasło:</label>
-                <input type="password" id="password" placeholder="Wpisz hasło">
-                <small>Error message</small>
-            </div>
-            <div class="form-control">
-                <label for="password2">Powtórz hasło:</label>
-                <input type="password" id="password2" placeholder="Powtórz hasło">
-                <small>Error message</small>
-            </div>
-            <input type="submit" value="Wyślij" class="form-button">
-        </form>
+    <div class="wrapper">
+
+        <div class="logo">
+            <i class="fas fa-fist-raised"></i>
+        </div>
+
+        <div class="lang">
+            <button>
+                <i class="fas fa-globe"></i> <span class="lang-select">PL</span>
+            </button>
+        </div>
+
+        <h1>Create an<br> account</h1>
+
+        <div class="form-wrap">
+            <form id="form" class="form">
+                <h2>Zarejestruj się!</h2>
+                <div class="form-control">
+                    <label for="username">Imię:</label>
+                    <input type="text" id="username" placeholder="Wpisz imię">
+                    <small>Error message</small>
+                </div>
+                <div class="form-control">
+                    <label for="email">Email:</label>
+                    <input type="text" id="email" placeholder="Wpisz email">
+                    <small>Error message</small>
+                </div>
+                <div class="form-control">
+                    <label for="password">Hasło:</label>
+                    <input type="password" id="password" placeholder="Wpisz hasło">
+                    <small>Error message</small>
+                </div>
+                <div class="form-control">
+                    <label for="password2">Powtórz hasło:</label>
+                    <input type="password" id="password2" placeholder="Powtórz hasło">
+                    <small>Error message</small>
+                </div>
+                <input type="submit" value="Wyślij" class="form-button">
+            </form>
+        </div>
+
     </div>
 
+    <script src="https://kit.fontawesome.com/a330ae9e9c.js" crossorigin="anonymous"></script>
     <script src="main.js"></script>
 </body>
 
