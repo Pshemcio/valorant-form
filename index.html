@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Validation</title>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Montserrat:wght@300;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="wrapper">
+
+        <div class="logo">
+            <i class="fas fa-fist-raised"></i>
+        </div>
+
+        <div class="docs-lang">
+            <div class="lang">
+                <button>
+                    <i class="fas fa-globe"></i> <span class="lang-select">EN</span>
+                </button>
+            </div>
+            <div class="docs">
+                <ul class="terms">
+                    <li><a href="#">support</a></li>
+                    <li><a href="#" class="middle-term">privacy notice</a></li>
+                    <li><a href="#">terms of service</a></li>
+                </ul>
+                <p>© 2020 RIOT GAMES. ALL RIGHTS RESERVED.</p>
+            </div>
+        </div>
+
+        <h1>Create an<br> account</h1>
+
+        <div class="form-wrap">
+            <form id="form" class="form">
+                <div class="form-control page-email">
+                    <h2>What's your email?</h2>
+                    <div class="inner-wrap">
+                        <div class="input-wrap">
+                            <input type="text" id="email">
+                            <label for="email">EMAIL</label>
+                        </div>
+                        <label class="newsletter"><input type="checkbox"><span class="check"><i
+                                    class="fas fa-check"></i></span> Receive occasional news and special offers
+                            from Riot Games
+                        </label>
+                    </div>
+                    <div class="form-socials">
+                        <small>you can also create an account with</small>
+                        <div class="socials">
+                            <div class="social facebook"><i class="fab fa-facebook"></i></div>
+                            <div class="social google"><i class="fab fa-google"></i></div>
+                            <div class="social apple"><i class="fab fa-apple"></i></div>
+                        </div>
+                    </div>
+                    <button id="email-btn" class="next-page"><i class="fas fa-arrow-right"></i></button>
+                    <a href="#" class="registered">already have an account?</a>
+                </div>
+                <div class="form-control page-birthday">
+                    <div class="inner-wrap birthday-wrap">
+                        <h2>When were you born?</h2>
+                        <p>Let's find out how old you are.</p>
+                        <div class="input-wrap">
+                            <input type="date" id="birthday" autocomplete="off">
+                        </div>
+                    </div>
+                    <button id="birthday-btn" class="next-page smaller-pages"><i
+                            class="fas fa-arrow-right"></i></button>
+                </div>
+                <div class="form-control page-username">
+                    <div class="inner-wrap username-wrap">
+                        <h2>Choose a username</h2>
+                        <p>Used for sign in to all our games.</p>
+                        <div class="input-wrap">
+                            <input type="text" id="username" autocomplete="off">
+                            <label for="username">USERNAME</label>
+                        </div>
+                    </div>
+                    <button id="username-btn" class="next-page smaller-pages"><i
+                            class="fas fa-arrow-right"></i></button>
+                </div>
+
+
+                <!-- <div class="form-control">
+                    <label for="email">Email:</label>
+                    <input type="text" id="email" placeholder="Wpisz email">
+                    <small>Error message</small>
+                </div>
+                <div class="form-control">
+                    <label for="password">Hasło:</label>
+                    <input type="password" id="password" placeholder="Wpisz hasło">
+                    <small>Error message</small>
+                </div>
+                <div class="form-control">
+                    <label for="password2">Powtórz hasło:</label>
+                    <input type="password" id="password2" placeholder="Powtórz hasło">
+                    <small>Error message</small>
+                </div>
+                <input type="submit" value="Wyślij" class="form-button"> -->
+            </form>
+        </div>
+    </div>
+
+    <script src="https://kit.fontawesome.com/a330ae9e9c.js" crossorigin="anonymous"></script>
+    <script src="main.js"></script>
+</body>
+
+</html>
