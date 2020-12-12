@@ -200,17 +200,17 @@ h1 {
     transform: translate(-0.5vw, -1.7vw);
 }
 
-.input-wrap input[type='text'].error {
+.input-wrap input.error {
     background-color: #cd26f71f;
     border: 1px solid var(--error-color);
     outline: none;
 }
 
-.input-wrap input[type='text'].error:focus {
+.input-wrap input.error:focus {
     box-shadow: 0px 0px 0px 1px var(--error-color);
 }
 
-.input-wrap input[type='text'].error~label {
+.input-wrap input.error~label {
     color: #d83afffd;
 }
 
@@ -320,6 +320,8 @@ h1 {
     transition: background-color .4s, color .4s;
     outline: none;
     pointer-events: none;
+    display: grid;
+    place-content: center;
 }
 
 .btn-validate {
@@ -358,7 +360,7 @@ h1 {
     margin-top: 50px;
 }
 
-#birthday {
+input[type='date'] {
     width: 100%;
     appearance: none;
     box-sizing: border-box;
@@ -370,8 +372,8 @@ h1 {
     outline: none;
 }
 
-#birthday:focus {
-    border: 2px solid rgba(102, 102, 102, 0.8);
+input[type='date']:focus {
+    box-shadow: 0px 0px 0px 1px #999;
 }
 
 ::-webkit-datetime-edit-text {
@@ -410,4 +412,9 @@ h2+p {
 
 .smaller-pages {
     margin-bottom: 50px;
+}
+
+.error-msg {
+    margin-top: 11px;
+    color: var(--error-color);
 }

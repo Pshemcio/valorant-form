@@ -44,7 +44,7 @@
                     <h2>What's your email?</h2>
                     <div class="inner-wrap">
                         <div class="input-wrap">
-                            <input type="text" id="email">
+                            <input type="text" id="email" class="input1">
                             <label for="email">EMAIL</label>
                         </div>
                         <label class="newsletter"><input type="checkbox"><span class="check"><i
@@ -60,7 +60,7 @@
                             <div class="social apple"><i class="fab fa-apple"></i></div>
                         </div>
                     </div>
-                    <button id="email-btn" class="next-page"><i class="fas fa-arrow-right"></i></button>
+                    <p id="email-btn" class="next-page"><i class="fas fa-arrow-right"></i></p>
                     <a href="#" class="registered">already have an account?</a>
                 </div>
                 <div class="form-control page-birthday">
@@ -68,23 +68,22 @@
                         <h2>When were you born?</h2>
                         <p>Let's find out how old you are.</p>
                         <div class="input-wrap">
-                            <input type="date" id="birthday" autocomplete="off">
+                            <input type="date" id="birthday" class="input2" max='2999-01-01'>
+                            <p id="date-error" class="error-msg"></p>
                         </div>
                     </div>
-                    <button id="birthday-btn" class="next-page smaller-pages"><i
-                            class="fas fa-arrow-right"></i></button>
+                    <p id="birthday-btn" class="next-page smaller-pages"><i class="fas fa-arrow-right"></i></p>
                 </div>
                 <div class="form-control page-username">
                     <div class="inner-wrap username-wrap">
                         <h2>Choose a username</h2>
                         <p>Used for sign in to all our games.</p>
                         <div class="input-wrap">
-                            <input type="text" id="username" autocomplete="off">
+                            <input type="text" id="username" class="input3" autocomplete="off">
                             <label for="username">USERNAME</label>
                         </div>
                     </div>
-                    <button id="username-btn" class="next-page smaller-pages"><i
-                            class="fas fa-arrow-right"></i></button>
+                    <p id="username-btn" class="next-page smaller-pages"><i class="fas fa-arrow-right"></i></p>
                 </div>
 
 
