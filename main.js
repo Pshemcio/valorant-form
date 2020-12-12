@@ -10,6 +10,10 @@ document.addEventListener('DOMContentLoaded', () => {
         button.addEventListener('click', switchPage);
     });
 
+    showPassBtns.forEach(button => {
+        button.addEventListener('click', showPassword);
+    })
+
     autoFocus(email);
 });
 
@@ -23,11 +27,12 @@ const username = document.getElementById('username');
 const email = document.getElementById('email');
 const birthday = document.getElementById('birthday');
 const password = document.getElementById('password');
-const password2 = document.getElementById('password2');
-const inputs = document.querySelectorAll('.inner-wrap input');
+const confirmPassword = document.getElementById('confirm-password');
+const inputs = form.querySelectorAll('.inner-wrap input');
 const nextPageBtns = form.querySelectorAll('.next-page');
-const pageEmail = document.querySelector('.page-email');
+const pageEmail = form.querySelector('.page-email');
 const dateError = document.getElementById('date-error');
+const showPassBtns = form.querySelectorAll('.show-password');
 
 //Select input on page load
 const autoFocus = input => {
@@ -47,7 +52,6 @@ const movePlaceholderBack = input => {
 }
 
 //change input color and next-button event in case succes/error
-
 const basicValidator = (input, action) => {
     const button = input.closest('.form-control').querySelector('.next-page');
 
@@ -65,22 +69,31 @@ const getFieldName = (input) => {
         return 'Musisz powtórzyć hasło'
     };
 
-    return input.placeholder.charAt(6).toUpperCase() + input.placeholder.slice(7);
+    const txt = input.closest('.form-control').querySelector('.js-label').textContent.toLowerCase();
+
+    return txt.charAt(0).toUpperCase() + txt.slice(1);
 };
 
 const showError = (input, msg) => {
-    console.log('--------------------------')
-    console.log(input)
-    console.log(msg)
+    const errorField = input.closest('.form-control').querySelector('.error-msg')
+    errorField.textContent = msg;
+    basicValidator(input, false);
+};
+
+const showSuccess = input => {
+    const errorField = input.closest('.form-control').querySelector('.error-msg')
+    errorField.textContent = '';
+    basicValidator(input, true);
 };
 
 const checkLength = (input, min, max) => {
     if (input.value.length < min) {
-        showError(input, `${getFieldName(input)} musi mieć conajmniej ${min} znaków!`)
+        showError(input, `${getFieldName(input)} must have at least ${min} characters.`)
     } else if (input.value.length >= max) {
-        console.log(input)
-        // showError(input, `${getFieldName(input)} nie może mieć więcej niż ${min} znaków!`)
-    };
+        showError(input, `${getFieldName(input)} can't be longer than ${max} characters.`)
+    } else {
+        showSuccess(input);
+    }
 };
 
 const checkEmail = input => {
@@ -104,26 +117,54 @@ const calcAge = date => {
     if (age === 'NaN') {
         return
     } else if (age > 130) {
-        basicValidator(date, false)
-        dateError.textContent = `You must enter valid date.`
+        showError(date, `You must enter valid date.`);
     } else if (age < 16) {
-        basicValidator(date, false)
-        dateError.textContent = `You must be at least 16 years old, be patient. :)`
+        showError(date, `You must be at least 16 years old, be patient. :)`);
     } else {
-        basicValidator(date, true)
-        dateError.textContent = ``
+        showSuccess(date);
     }
 };
 
 const switchPage = (e) => {
-    const formControl = e.target.closest('.form-control');
-    console.log(e.target)
-    console.log(formControl)
-    console.log(formControl.parentElement)
-    form.style.transform = `translateY(-${$counter.swipe += 100}%)`
+    const mainInput = e.target.closest('.form-control').querySelector('.main-input');
+    mainInput.blur();
+    form.style.transform = `translateY(-${$counter.swipe += 100}%)`;
+
     setTimeout(() => {
         autoFocus(form.querySelector(`.input${$counter.inputClassNumber++}`));
     }, 500);
+};
+
+const checkPassword = (input, min, max) => {
+    // password tests
+    const button = input.closest('.form-control').querySelector('.next-page');
+
+    const inputPass = password.value.trim();
+    const hasUpperCase = /[A-Z]/.test(inputPass);
+    const hasNumbers = /\d/.test(inputPass);
+    const hasThreeUpperCase = /(.*[A-Z]){3,}.*/.test(inputPass);
+
+    if (!hasUpperCase) {
+        showError(password, 'At least one uppercase letter.')
+    } else if (!hasNumbers) {
+        showError(password, 'At least one number.')
+    } else if (!hasThreeUpperCase) {
+        showError(password, 'At least THREE numbers.')
+    }
+    else {
+        checkLength(input, min, max);
+        if (button.classList.contains('btn-validate')) {
+            checkPasswordMatch(confirmPassword, input);
+        }
+    };
+};
+
+const checkPasswordMatch = (input1, input2) => {
+    if (input1.value === input2.value) {
+        showSuccess(input1)
+        return
+    };
+    showError(input1, '');
 };
 
 const checkRequired = input => {
@@ -135,7 +176,6 @@ const checkRequired = input => {
         switchPage(input);
     };
 
-    // const actualInput = input.target.closest('form').querySelector('input');
     const actualInput = input.target;
 
     switch (actualInput.id) {
@@ -146,93 +186,21 @@ const checkRequired = input => {
             calcAge(actualInput);
             break;
         case username.id:
-            checkLength(actualInput, 3, 15);
+            checkLength(actualInput, 5, 15);
+            break;
+        case password.id:
+            checkPassword(actualInput, 8, 40);
+            break;
+        case confirmPassword.id:
+            checkPasswordMatch(actualInput, password);
             break;
     };
 };
 
+const showPassword = button => {
+    const wholeBtn = button.target.closest('span');
+    const input = button.target.closest('.input-wrap').querySelector('.main-input');
+    wholeBtn.classList.toggle('active');
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// TEMP DISABLED !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-const tempDisable = () => {
-    //show success outline
-    const showSuccess = input => {
-        const formControl = input.parentElement;
-        formControl.className = 'form-control success';
-    }
-
-    //check required
-    const checkRequired = (inputArr) => {
-        inputArr.forEach(input => {
-            //Checks if input has value
-            if (input.value.trim() === '') {
-                if (input.id === 'password2') {
-                    showError(input, `${getFieldName(input)}`)
-                    return
-                };
-
-                showError(input, `Musisz wpisać ${getFieldName(input)}`)
-
-            } else if (input.value.length > 0) {
-                showSuccess(input);
-
-                // final input validation
-                switch (input.id) {
-                    case username.id:
-                        checkLength(input, 3, 15);
-                        break;
-                    case password.id:
-                        checkLength(input, 6, 25);
-                        break;
-                    case email.id:
-                        checkEmail(input);
-                        break;
-                    case password2.id:
-                        checkPasswordMatch(password, input);
-                        break;
-                };
-            };
-        });
-    };
-
-    //check passwords match
-    const checkPasswordMatch = (input1, input2) => {
-        if (input1.value !== input2.value) {
-            showError(input2, 'Hasła się nie zgadzają!')
-        };
-    };
+    (wholeBtn.classList.contains('active')) ? input.setAttribute('type', 'text') : input.setAttribute('type', 'password');
 };

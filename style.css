@@ -162,8 +162,7 @@ h1 {
     font-size: 1.7vw;
 }
 
-.input-wrap input[type='text'],
-.input-wrap input[type='number'] {
+.main-input {
     width: 100%;
     padding: 1.4vw 1.1vw .6vw;
     font-size: 1.1vw;
@@ -177,10 +176,8 @@ h1 {
     position: relative;
 }
 
-.input-wrap input[type='text'].input-active,
-.input-wrap input[type='number'].input-active,
-.input-wrap input[type='text'].input-active:hover,
-.input-wrap input[type='number'].input-active:hover {
+.main-input.input-active,
+.main-input.input-active:hover {
     background-color: transparent;
 }
 
@@ -241,7 +238,7 @@ h1 {
 }
 
 .newsletter:hover .check,
-.input-wrap input[type='text']:hover {
+.main-input:hover {
     background-color: #d7d7d7;
 }
 
@@ -367,7 +364,7 @@ input[type='date'] {
     border: 1px solid rgba(102, 102, 102, 0.4);
     border-radius: 3px;
     background: transparent;
-    font-size: 1rem;
+    font-size: 1vw;
     padding: 1vw;
     outline: none;
 }
@@ -415,6 +412,64 @@ h2+p {
 }
 
 .error-msg {
-    margin-top: 11px;
-    color: var(--error-color);
+    position: absolute;
+    margin-top: .6vw;
+    color: #cd26f7ce;
+}
+
+.password-checklist {
+    list-style-type: none;
+    margin: 1.5vw 0 25px;
+    padding-left: 1vw;
+    color: #999;
+    font-size: 1vw;
+}
+
+.password-checklist li {
+    margin-bottom: .3vw;
+}
+
+.okay {
+    color: rgb(248, 217, 39);
+}
+
+.great {
+    color: rgb(3, 211, 194);
+}
+
+.page-password .error-msg {
+    left: 1vw;
+    margin-top: .2vw;
+    font-size: .8vw;
+    font-weight: 600;
+}
+
+.show-password {
+    padding: 1.3vw;
+    font-size: 1.3vw;
+    top: 50%;
+    transform: translateY(-60%);
+    right: 1vw;
+    cursor: pointer;
+    opacity: 0;
+}
+
+.show-password:hover {
+    opacity: 1;
+}
+
+.show-password,
+.show-password i {
+    position: absolute;
+    transition: opacity .5s;
+}
+
+.show-password i {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.show-password.active i:last-of-type {
+    opacity: 0;
 }

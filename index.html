@@ -44,8 +44,8 @@
                     <h2>What's your email?</h2>
                     <div class="inner-wrap">
                         <div class="input-wrap">
-                            <input type="text" id="email" class="input1">
-                            <label for="email">EMAIL</label>
+                            <input type="text" id="email" class="input1 main-input">
+                            <label for="email" class="js-label">EMAIL</label>
                         </div>
                         <label class="newsletter"><input type="checkbox"><span class="check"><i
                                     class="fas fa-check"></i></span> Receive occasional news and special offers
@@ -68,7 +68,7 @@
                         <h2>When were you born?</h2>
                         <p>Let's find out how old you are.</p>
                         <div class="input-wrap">
-                            <input type="date" id="birthday" class="input2" max='2999-01-01'>
+                            <input type="date" id="birthday" class="input2 main-input" max='2999-01-01'>
                             <p id="date-error" class="error-msg"></p>
                         </div>
                     </div>
@@ -79,19 +79,50 @@
                         <h2>Choose a username</h2>
                         <p>Used for sign in to all our games.</p>
                         <div class="input-wrap">
-                            <input type="text" id="username" class="input3" autocomplete="off">
-                            <label for="username">USERNAME</label>
+                            <input type="text" id="username" class="input3 main-input" autocomplete="off">
+                            <label for="username" class="js-label">USERNAME</label>
+                            <p id="username-error" class="error-msg"></p>
                         </div>
                     </div>
                     <p id="username-btn" class="next-page smaller-pages"><i class="fas fa-arrow-right"></i></p>
                 </div>
-
-
-                <!-- <div class="form-control">
-                    <label for="email">Email:</label>
-                    <input type="text" id="email" placeholder="Wpisz email">
-                    <small>Error message</small>
+                <div class="form-control page-password">
+                    <div class="inner-wrap password-wrap">
+                        <h2>Choose a password</h2>
+                        <p>Make sure it's a good one.</p>
+                        <div class="input-wrap">
+                            <input type="password" id="password" class="input4 main-input" autocomplete="off">
+                            <label for="password" class="js-label">PASSWORD</label>
+                            <span class="show-password">
+                                <i class="far fa-eye"></i>
+                                <i class="far fa-eye-slash"></i>
+                            </span>
+                            <p id="password-error" class="error-msg"></p>
+                        </div>
+                        <ul class="password-checklist">
+                            <li id="pass-strength"><i class="fas fa-times-circle"></i> Must be Okay strength or better.
+                            </li>
+                            <li id="pass-length"><i class="fas fa-times-circle"></i> Password is at least 8 characters
+                                long.</li>
+                            <li id="pass-number"><i class="fas fa-times-circle"></i> Password contains
+                                at least one
+                                letter or number</li>
+                        </ul>
+                        <div class="input-wrap">
+                            <input type="password" id="confirm-password" class="input5 main-input" autocomplete="off">
+                            <label for="confirm-password" class="js-label">CONFIRM PASSWORD</label>
+                            <span class="show-password">
+                                <i class="far fa-eye"></i>
+                                <i class="far fa-eye-slash"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <p id="password-btn" class="next-page smaller-pages"><i class="fas fa-arrow-right"></i></input>
                 </div>
+        </div>
+
+
+        <!-- 
                 <div class="form-control">
                     <label for="password">Hasło:</label>
                     <input type="password" id="password" placeholder="Wpisz hasło">
@@ -103,8 +134,8 @@
                     <small>Error message</small>
                 </div>
                 <input type="submit" value="Wyślij" class="form-button"> -->
-            </form>
-        </div>
+        </form>
+    </div>
     </div>
 
     <script src="https://kit.fontawesome.com/a330ae9e9c.js" crossorigin="anonymous"></script>
