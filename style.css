@@ -11,6 +11,11 @@
     font-family: 'Montserrat', sans-serif;
 }
 
+.next-page>*,
+.show-password>* {
+    pointer-events: none;
+}
+
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
@@ -123,7 +128,7 @@ input[type=number] {
 h1 {
     position: absolute;
     left: 7vw;
-    bottom: 25vh;
+    bottom: 12vw;
     font-family: 'Archivo Black', sans-serif;
     color: white;
     text-transform: uppercase;
@@ -144,7 +149,7 @@ h1 {
 
 
 
-.form {
+#form {
     position: relative;
     height: 100%;
     transition: transform .4s;
@@ -224,8 +229,8 @@ h1 {
     font-size: .9vw;
 }
 
-.newsletter input[type="checkbox"] {
-    margin-right: 30px;
+.newsletter input {
+    margin-right: 1.3vw;
     visibility: hidden;
 }
 
@@ -516,4 +521,15 @@ h2+p {
 #message {
     height: 11vw;
     font-size: 1vw;
+}
+
+.submit-wrap .newsletter {
+    margin-top: 2vw;
+    line-height: 2em;
+}
+
+#submit-btn {
+    margin-top: 2vw;
+    width: auto;
+    padding: 0 2vw;
 }

@@ -6,12 +6,9 @@ document.addEventListener('DOMContentLoaded', () => {
         input.addEventListener('blur', movePlaceholderBack);
     })
 
-    nextPageBtns.forEach(button => {
-        button.addEventListener('click', switchPage);
-    });
-
-    showPassBtns.forEach(button => {
-        button.addEventListener('click', showPassword);
+    form.addEventListener('click', checkBtnClick);
+    form.addEventListener('submit', () => {
+        alert('uwaga!')
     })
 
     autoFocus(email);
@@ -30,31 +27,28 @@ const password = document.getElementById('password');
 const confirmPassword = document.getElementById('confirm-password');
 const message = document.getElementById('message');
 const inputs = form.querySelectorAll('.main-input');
-const nextPageBtns = form.querySelectorAll('.next-page');
-const lastPageBtn = document.getElementById('password-btn');
-const pageEmail = form.querySelector('.page-email');
-const dateError = document.getElementById('date-error');
-const showPassBtns = form.querySelectorAll('.show-password');
+const submitBtn = document.getElementById('submit-btn');
 const passwordChecklist = form.querySelector('.password-checklist');
 const passStrength = document.querySelector('#pass-strength i');
+const backBtn = document.getElementById('back-btn');
+const submitCheckbox = document.getElementById('submit-checkbox');
 
 //Select input on page load
 const autoFocus = input => {
-    console.log(input)
     input.focus();
-}
+};
 
 //move placeholder text up while on focus
 const movePlaceholderUp = input => {
     input.target.classList.add('input-active')
-}
+};
 
 const movePlaceholderBack = input => {
     if (input.target.value !== '') {
         return;
     }
     input.target.classList.remove('input-active');
-}
+};
 
 //change input color and next-button event in case succes/error
 const basicValidator = (input, action) => {
@@ -79,25 +73,20 @@ const getFieldName = (input) => {
     return txt.charAt(0).toUpperCase() + txt.slice(1);
 };
 
-const showError = (input, msg) => {
+// if you want success just add boolean TRUE as third parameter and empty string as second
+const showResult = (input, msg, logic) => {
     const errorField = input.closest('.form-control').querySelector('.error-msg')
     errorField.textContent = msg;
-    basicValidator(input, false);
-};
-
-const showSuccess = input => {
-    const errorField = input.closest('.form-control').querySelector('.error-msg')
-    errorField.textContent = '';
-    basicValidator(input, true);
+    basicValidator(input, logic);
 };
 
 const checkLength = (input, min, max) => {
     if (input.value.length < min) {
-        showError(input, `${getFieldName(input)} must have at least ${min} characters.`)
+        showResult(input, `${getFieldName(input)} must have at least ${min} characters.`)
     } else if (input.value.length >= max) {
-        showError(input, `${getFieldName(input)} can't be longer than ${max} characters.`)
+        showResult(input, `${getFieldName(input)} can't be longer than ${max} characters.`)
     } else {
-        showSuccess(input);
+        showResult(input, '', true);
     };
 };
 
@@ -107,7 +96,7 @@ const checkUsername = (input, min, max) => {
     if (re.test(String(input.value).trim())) {
         checkLength(input, min, max)
     } else {
-        showError(input, `Only letters and numbers are allowed.`)
+        showResult(input, `Only letters and numbers are allowed.`)
     };
 };
 
@@ -132,11 +121,11 @@ const calcAge = date => {
     if (age === 'NaN') {
         return
     } else if (age > 130 || age < 2) {
-        showError(date, `You must enter valid date.`);
+        showResult(date, `You must enter valid date.`, false);
     } else if (age < 16) {
-        showError(date, `You must be at least 16 years old, be patient. :)`);
+        showResult(date, `You must be at least 16 years old, be patient. :)`, false);
     } else {
-        showSuccess(date);
+        showResult(date, '', true);
     };
 };
 
@@ -166,7 +155,7 @@ const checkPassword = (input, min) => {
         input.classList.remove('input-great');
         input.classList.remove('input-okay');
         errorField.className = `error-msg`;
-        showError(password, 'Too weak');
+        showResult(password, 'Too weak', false);
     } else if (hasThreeUpperCase && hasThreeNumbers) {
         passwordSuccessMsg(password, 'Great', errorField, 'input-okay');
     } else {
@@ -180,10 +169,10 @@ const checkPassword = (input, min) => {
 
 const checkPasswordMatch = (input1, input2) => {
     if (input1.value === input2.value && passStrength.classList.contains('great')) {
-        showSuccess(input1)
+        showResult(input1, '', true)
         return
     };
-    showError(input1, '');
+    showResult(input1, '', false);
 };
 
 const showPassword = button => {
@@ -195,19 +184,15 @@ const showPassword = button => {
 };
 
 const checkMessage = (input, min, max) => {
-    const re = /^[A-Za-z0-9ęóąśłżźćńĘÓĄŚŁŻŹĆŃ _,.?!()@#%*=+-/]{0,}$/u;
+    const re = /^[^&[/{}$<>|]{0,}$/u;
 
     if (!re.test(String(input.value).trim())) {
-        return showError(input, `You can't use special characters.`);
+        return showResult(input, `You can't use special characters.`, false);
     };
 
     checkLength(input, min, max);
 
 };
-
-const lastPageDisplay = (input) => {
-    console.log(input)
-}
 
 const checkRequired = input => {
     input.preventDefault();
@@ -217,8 +202,8 @@ const checkRequired = input => {
 
 
     if (input.key === 'Enter') {
-        if (btn.classList.contains('btn-validate') && btn.classList.contains('last-page')) {
-            lastPageDisplay(actualInput);
+        if (btn.classList.contains('btn-validate') && btn.id === 'message-btn') {
+            return;
         } else if (btn.classList.contains('btn-validate')) {
             switchPage(input);
         };
@@ -246,15 +231,43 @@ const checkRequired = input => {
     };
 };
 
-const switchPage = (input) => {
+const submitForm = e => {
+    e.preventDefault();
+    inputs.forEach(input => {
+        console.log(input.value)
+    })
+    form.submit();
+};
+
+const checkBtnClick = input => {
     const formControl = input.target.closest('.form-control');
-    const finalInput = formControl.querySelector('.main-input');
+    const nextPageBtn = formControl.querySelector('.next-page');
 
-    if (formControl.classList.contains('page-message')) {
-        return lastPageDisplay(finalInput);
-    }
+    if (input.target === submitBtn) {
+        return submitForm(input);
+    };
 
-    input.target.closest('.form-control').querySelector('.main-input').blur();
+    if (submitCheckbox.checked) {
+        return agreementConfirmation(submitCheckbox);
+    };
+
+    if (input.target === nextPageBtn) {
+        switchPage(input);
+    } else if (input.target.classList.contains('show-password')) {
+        showPassword(input);
+    };
+};
+
+const agreementConfirmation = (input) => {
+    const button = input.closest('.form-control').querySelector('.next-page');
+    input.classList.toggle('test');
+    button.classList.toggle('btn-validate');
+};
+
+const switchPage = input => {
+    const formControl = input.target.closest('.form-control');
+
+    formControl.querySelector('.main-input').blur();
     formControl.nextElementSibling.classList.toggle('active');
     form.style.transform = `translateY(-${$counter.swipe += 100}%)`;
     setTimeout(() => {

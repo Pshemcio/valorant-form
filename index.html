@@ -37,10 +37,10 @@
         <h1>Create an<br> account</h1>
 
         <div class="form-wrap">
-            <form id="form" class="form">
-                <p id="back-btn" class="back-btn">
+            <form method="POST" id="form">
+                <button type="button" id="back-btn" class="back-btn">
                     <i class="fas fa-arrow-up"></i>
-                </p>
+                </button>
                 <div class="form-control active page-email">
                     <h2>What's your email?</h2>
                     <div class="inner-wrap">
@@ -61,7 +61,9 @@
                             <div class="social apple"><i class="fab fa-apple"></i></div>
                         </div>
                     </div>
-                    <p id="email-btn" class="next-page"><i class="fas fa-arrow-right"></i></p>
+                    <button type="button" id="email-btn" class="next-page">
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
                     <a href="#" class="registered">already have an account?</a>
                 </div>
                 <div class="form-control page-birthday">
@@ -73,7 +75,9 @@
                             <p id="date-error" class="error-msg"></p>
                         </div>
                     </div>
-                    <p id="birthday-btn" class="next-page smaller-pages"><i class="fas fa-arrow-right"></i></p>
+                    <button type="button" id="birthday-btn" class="next-page smaller-pages">
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
                 </div>
                 <div class="form-control page-username">
                     <div class="inner-wrap username-wrap">
@@ -85,7 +89,9 @@
                             <p id="username-error" class="error-msg"></p>
                         </div>
                     </div>
-                    <p id="username-btn" class="next-page smaller-pages"><i class="fas fa-arrow-right"></i></p>
+                    <button type="button" id="username-btn" class="next-page smaller-pages">
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
                 </div>
                 <div class="form-control page-password">
                     <div class="inner-wrap password-wrap">
@@ -118,19 +124,39 @@
                             </span>
                         </div>
                     </div>
-                    <p id="password-btn" class="next-page smaller-pages"><i class="fas fa-arrow-right"></i></input>
+                    <button type="button" id="password-btn" class="next-page smaller-pages">
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
                 </div>
                 <div class="form-control page-message">
                     <div class="inner-wrap message-wrap">
-                        <h2>Thanks for checking it out :)</h2>
-                        <p>Feel free to contact me by clicking next button!</p>
+                        <h2>Any questions/feedback?</h2>
+                        <p>Feel free to write them below!</p>
                         <div class="input-wrap">
                             <textarea name="message" id="message" class="input5 main-input"></textarea>
                             <label for="message" class="js-label">MESSAGE</label>
                             <p id="message-error" class="error-msg"></p>
                         </div>
                     </div>
-                    <p id="message-btn" class="next-page smaller-pages last-page"><i class="fas fa-arrow-right"></i></p>
+                    <button type="button" id="message-btn" class="next-page smaller-pages"><i
+                            class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+                <div class="form-control page-submit">
+                    <div class="inner-wrap submit-wrap">
+                        <h2>Thanks for checking it out :)</h2>
+                        <label class="newsletter input6"><input id="submit-checkbox" type="checkbox">
+                            <span class="check"><i class="fas fa-check"></i>
+                            </span> By clicking submit button you agree to send me
+                            provided contact info and to get eventual
+                            reply from me.
+                            <br>I am not going to use your password but if i was in your place i would
+                            rather change it to something random :)
+                        </label>
+                    </div>
+                    <button type="button" id="submit-btn" class="next-page smaller-pages">
+                        Submit!
+                    </button>
                 </div>
             </form>
         </div>
