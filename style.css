@@ -24,7 +24,6 @@ input[type=number] {
 }
 
 .wrapper {
-    /* background-image: url(img/main-bg-lg.jpg); */
     background: linear-gradient(rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, .5)), url(img/main-bg-lg.jpg);
     background-position: center;
     background-size: cover;
@@ -143,9 +142,12 @@ h1 {
     overflow: hidden;
 }
 
+
+
 .form {
+    position: relative;
     height: 100%;
-    transition: transform .6s;
+    transition: transform .4s;
 }
 
 .form-control {
@@ -155,7 +157,11 @@ h1 {
     justify-content: space-around;
     align-items: center;
     padding: 4vw 3.6vw 1vw;
+    visibility: hidden;
+}
 
+.form-control.active {
+    visibility: visible;
 }
 
 .form-control h2 {
@@ -177,14 +183,14 @@ h1 {
 }
 
 .main-input.input-active,
-.main-input.input-active:hover {
+.main-input.input-active:focus {
     background-color: transparent;
 }
 
 .input-wrap label {
     position: absolute;
     left: 1vw;
-    top: 50%;
+    top: 2.1vw;
     font-size: .7vw;
     transform: translateY(-80%);
     transition: .5s;
@@ -197,17 +203,17 @@ h1 {
     transform: translate(-0.5vw, -1.7vw);
 }
 
-.input-wrap input.error {
+.input-wrap .main-input.error {
     background-color: #cd26f71f;
     border: 1px solid var(--error-color);
     outline: none;
 }
 
-.input-wrap input.error:focus {
+.input-wrap .main-input.error:focus {
     box-shadow: 0px 0px 0px 1px var(--error-color);
 }
 
-.input-wrap input.error~label {
+.input-wrap .main-input.error~label {
     color: #d83afffd;
 }
 
@@ -305,30 +311,52 @@ h1 {
     background-color: #333;
 }
 
-.next-page {
-    width: 5vw;
-    height: 5vw;
-    background-color: transparent;
-    color: var(--input-color);
-    font-size: 2vw;
+.next-page,
+#back-btn {
     border: 1px solid var(--input-color);
     border-radius: 20px;
     cursor: pointer;
     transition: background-color .4s, color .4s;
     outline: none;
-    pointer-events: none;
     display: grid;
     place-content: center;
 }
 
-.btn-validate {
+.next-page {
+    width: 5vw;
+    height: 5vw;
+    color: var(--input-color);
+    font-size: 2vw;
+    pointer-events: none;
+}
+
+#back-btn {
+    position: absolute;
+    top: 1.5vw;
+    right: 1.5vw;
+    width: 3.3vw;
+    height: 3.3vw;
+    font-size: 1.4vw;
+}
+
+.btn-validate,
+#back-btn {
     pointer-events: all;
     background-color: #FF4654;
     color: white;
 }
 
-.btn-validate:hover {
+.btn-validate:hover,
+#back-btn:hover {
     background-color: #e4414e;
+}
+
+.btn-validate i {
+    transition: transform .4s;
+}
+
+.btn-validate:hover i {
+    transform: rotate(90deg);
 }
 
 .registered {
@@ -412,6 +440,7 @@ h2+p {
 }
 
 .error-msg {
+    font-size: 1vw;
     position: absolute;
     margin-top: .6vw;
     color: #cd26f7ce;
@@ -435,6 +464,16 @@ h2+p {
 
 .great {
     color: rgb(3, 211, 194);
+}
+
+.input-okay {
+    outline: none;
+    border: 1px solid rgb(248, 217, 39);
+}
+
+.input-great {
+    outline: none;
+    border: 1px solid rgb(3, 211, 194);
 }
 
 .page-password .error-msg {
@@ -472,4 +511,9 @@ h2+p {
 
 .show-password.active i:last-of-type {
     opacity: 0;
+}
+
+#message {
+    height: 11vw;
+    font-size: 1vw;
 }

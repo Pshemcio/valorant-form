@@ -7,7 +7,6 @@
     <title>Form Validation</title>
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Montserrat:wght@300;500;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="style.css">
@@ -15,7 +14,6 @@
 
 <body>
     <div class="wrapper">
-
         <div class="logo">
             <i class="fas fa-fist-raised"></i>
         </div>
@@ -40,7 +38,10 @@
 
         <div class="form-wrap">
             <form id="form" class="form">
-                <div class="form-control page-email">
+                <p id="back-btn" class="back-btn">
+                    <i class="fas fa-arrow-up"></i>
+                </p>
+                <div class="form-control active page-email">
                     <h2>What's your email?</h2>
                     <div class="inner-wrap">
                         <div class="input-wrap">
@@ -109,7 +110,7 @@
                                 letter or number</li>
                         </ul>
                         <div class="input-wrap">
-                            <input type="password" id="confirm-password" class="input5 main-input" autocomplete="off">
+                            <input type="password" id="confirm-password" class=" main-input" autocomplete="off">
                             <label for="confirm-password" class="js-label">CONFIRM PASSWORD</label>
                             <span class="show-password">
                                 <i class="far fa-eye"></i>
@@ -119,23 +120,20 @@
                     </div>
                     <p id="password-btn" class="next-page smaller-pages"><i class="fas fa-arrow-right"></i></input>
                 </div>
+                <div class="form-control page-message">
+                    <div class="inner-wrap message-wrap">
+                        <h2>Thanks for checking it out :)</h2>
+                        <p>Feel free to contact me by clicking next button!</p>
+                        <div class="input-wrap">
+                            <textarea name="message" id="message" class="input5 main-input"></textarea>
+                            <label for="message" class="js-label">MESSAGE</label>
+                            <p id="message-error" class="error-msg"></p>
+                        </div>
+                    </div>
+                    <p id="message-btn" class="next-page smaller-pages last-page"><i class="fas fa-arrow-right"></i></p>
+                </div>
+            </form>
         </div>
-
-
-        <!-- 
-                <div class="form-control">
-                    <label for="password">Hasło:</label>
-                    <input type="password" id="password" placeholder="Wpisz hasło">
-                    <small>Error message</small>
-                </div>
-                <div class="form-control">
-                    <label for="password2">Powtórz hasło:</label>
-                    <input type="password" id="password2" placeholder="Powtórz hasło">
-                    <small>Error message</small>
-                </div>
-                <input type="submit" value="Wyślij" class="form-button"> -->
-        </form>
-    </div>
     </div>
 
     <script src="https://kit.fontawesome.com/a330ae9e9c.js" crossorigin="anonymous"></script>

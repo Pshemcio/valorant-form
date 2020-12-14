@@ -28,14 +28,19 @@ const email = document.getElementById('email');
 const birthday = document.getElementById('birthday');
 const password = document.getElementById('password');
 const confirmPassword = document.getElementById('confirm-password');
-const inputs = form.querySelectorAll('.inner-wrap input');
+const message = document.getElementById('message');
+const inputs = form.querySelectorAll('.main-input');
 const nextPageBtns = form.querySelectorAll('.next-page');
+const lastPageBtn = document.getElementById('password-btn');
 const pageEmail = form.querySelector('.page-email');
 const dateError = document.getElementById('date-error');
 const showPassBtns = form.querySelectorAll('.show-password');
+const passwordChecklist = form.querySelector('.password-checklist');
+const passStrength = document.querySelector('#pass-strength i');
 
 //Select input on page load
 const autoFocus = input => {
+    console.log(input)
     input.focus();
 }
 
@@ -93,7 +98,17 @@ const checkLength = (input, min, max) => {
         showError(input, `${getFieldName(input)} can't be longer than ${max} characters.`)
     } else {
         showSuccess(input);
-    }
+    };
+};
+
+const checkUsername = (input, min, max) => {
+    const re = /^[A-Za-z0-9_-]{0,}$/;
+
+    if (re.test(String(input.value).trim())) {
+        checkLength(input, min, max)
+    } else {
+        showError(input, `Only letters and numbers are allowed.`)
+    };
 };
 
 const checkEmail = input => {
@@ -116,91 +131,134 @@ const calcAge = date => {
 
     if (age === 'NaN') {
         return
-    } else if (age > 130) {
+    } else if (age > 130 || age < 2) {
         showError(date, `You must enter valid date.`);
     } else if (age < 16) {
         showError(date, `You must be at least 16 years old, be patient. :)`);
     } else {
         showSuccess(date);
-    }
-};
-
-const switchPage = (e) => {
-    const mainInput = e.target.closest('.form-control').querySelector('.main-input');
-    mainInput.blur();
-    form.style.transform = `translateY(-${$counter.swipe += 100}%)`;
-
-    setTimeout(() => {
-        autoFocus(form.querySelector(`.input${$counter.inputClassNumber++}`));
-    }, 500);
-};
-
-const checkPassword = (input, min, max) => {
-    // password tests
-    const button = input.closest('.form-control').querySelector('.next-page');
-
-    const inputPass = password.value.trim();
-    const hasUpperCase = /[A-Z]/.test(inputPass);
-    const hasNumbers = /\d/.test(inputPass);
-    const hasThreeUpperCase = /(.*[A-Z]){3,}.*/.test(inputPass);
-
-    if (!hasUpperCase) {
-        showError(password, 'At least one uppercase letter.')
-    } else if (!hasNumbers) {
-        showError(password, 'At least one number.')
-    } else if (!hasThreeUpperCase) {
-        showError(password, 'At least THREE numbers.')
-    }
-    else {
-        checkLength(input, min, max);
-        if (button.classList.contains('btn-validate')) {
-            checkPasswordMatch(confirmPassword, input);
-        }
     };
 };
 
+const passwordChecklistTest = (input, output) => {
+    input ? output.classList.add('great') : output.classList.remove('great')
+}
+
+const passwordSuccessMsg = (input, msg, errorField, removeClass) => {
+    input.classList.remove('error');
+    input.classList.remove(removeClass);
+    input.classList.add(`input-${msg.toLowerCase()}`);
+    errorField.textContent = msg;
+    errorField.className = `error-msg ${msg.toLowerCase()}`;
+};
+
+const checkPassword = (input, min) => {
+    // password tests
+    const errorField = input.closest('.form-control').querySelector('.error-msg');
+
+    const inputPass = password.value.trim();
+    const hasLetters = /[a-zA-Z]/.test(inputPass)
+    const hasNumbers = /\d/.test(inputPass);
+    const hasThreeUpperCase = /(.*[A-Z]){3,}.*/.test(inputPass);
+    const hasThreeNumbers = /(.*[\d]){4,}.*/.test(inputPass);
+
+    if (inputPass.length < min || !hasLetters || !hasNumbers) {
+        input.classList.remove('input-great');
+        input.classList.remove('input-okay');
+        errorField.className = `error-msg`;
+        showError(password, 'Too weak');
+    } else if (hasThreeUpperCase && hasThreeNumbers) {
+        passwordSuccessMsg(password, 'Great', errorField, 'input-okay');
+    } else {
+        passwordSuccessMsg(password, 'Okay', errorField, 'input-great');
+    };
+
+    passwordChecklistTest((inputPass.length >= 8), document.querySelector('#pass-length i'));
+    passwordChecklistTest((hasLetters && hasNumbers && inputPass.length >= 8), passStrength);
+    passwordChecklistTest((hasLetters && hasNumbers), document.querySelector('#pass-number i'));
+};
+
 const checkPasswordMatch = (input1, input2) => {
-    if (input1.value === input2.value) {
+    if (input1.value === input2.value && passStrength.classList.contains('great')) {
         showSuccess(input1)
         return
     };
     showError(input1, '');
 };
 
+const showPassword = button => {
+    const showPasswordBtn = button.target.closest('span');
+    const input = button.target.closest('.input-wrap').querySelector('.main-input');
+    showPasswordBtn.classList.toggle('active');
+
+    (showPasswordBtn.classList.contains('active')) ? input.setAttribute('type', 'text') : input.setAttribute('type', 'password');
+};
+
+const checkMessage = (input, min, max) => {
+    const re = /^[A-Za-z0-9ęóąśłżźćńĘÓĄŚŁŻŹĆŃ _,.?!()@#%*=+-/]{0,}$/u;
+
+    if (!re.test(String(input.value).trim())) {
+        return showError(input, `You can't use special characters.`);
+    };
+
+    checkLength(input, min, max);
+
+};
+
+const lastPageDisplay = (input) => {
+    console.log(input)
+}
+
 const checkRequired = input => {
     input.preventDefault();
 
+    const actualInput = input.target;
     const btn = input.target.closest('.form-control').querySelector('.next-page');
 
-    if (btn.classList.contains('btn-validate') && input.key === 'Enter') {
-        switchPage(input);
+
+    if (input.key === 'Enter') {
+        if (btn.classList.contains('btn-validate') && btn.classList.contains('last-page')) {
+            lastPageDisplay(actualInput);
+        } else if (btn.classList.contains('btn-validate')) {
+            switchPage(input);
+        };
     };
 
-    const actualInput = input.target;
-
-    switch (actualInput.id) {
-        case email.id:
+    switch (actualInput) {
+        case email:
             checkEmail(actualInput);
             break;
-        case birthday.id:
+        case birthday:
             calcAge(actualInput);
             break;
-        case username.id:
-            checkLength(actualInput, 5, 15);
+        case username:
+            checkUsername(actualInput, 5, 15);
             break;
-        case password.id:
-            checkPassword(actualInput, 8, 40);
+        case password:
+            checkPassword(actualInput, 8);
             break;
-        case confirmPassword.id:
+        case confirmPassword:
             checkPasswordMatch(actualInput, password);
+            break;
+        case message:
+            checkMessage(actualInput, 5, 200);
             break;
     };
 };
 
-const showPassword = button => {
-    const wholeBtn = button.target.closest('span');
-    const input = button.target.closest('.input-wrap').querySelector('.main-input');
-    wholeBtn.classList.toggle('active');
+const switchPage = (input) => {
+    const formControl = input.target.closest('.form-control');
+    const finalInput = formControl.querySelector('.main-input');
 
-    (wholeBtn.classList.contains('active')) ? input.setAttribute('type', 'text') : input.setAttribute('type', 'password');
+    if (formControl.classList.contains('page-message')) {
+        return lastPageDisplay(finalInput);
+    }
+
+    input.target.closest('.form-control').querySelector('.main-input').blur();
+    formControl.nextElementSibling.classList.toggle('active');
+    form.style.transform = `translateY(-${$counter.swipe += 100}%)`;
+    setTimeout(() => {
+        formControl.classList.toggle('active');
+        autoFocus(form.querySelector(`.input${$counter.inputClassNumber++}`));
+    }, 200);
 };
