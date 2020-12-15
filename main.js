@@ -1,23 +1,24 @@
 document.addEventListener('DOMContentLoaded', () => {
+    //Load data
+    setLang('EN');
+    createNextBtns();
+    createBackBtns();
+    autoFocus(email);
+
     //Event listeners
     mainInputs.forEach(input => {
         input.addEventListener('keyup', checkRequired)
         input.addEventListener('focus', movePlaceholderUp);
         input.addEventListener('blur', movePlaceholderBack);
-    })
-
-    form.addEventListener('click', checkBtnClick);
-    form.addEventListener('submit', () => {
-        alert('uwaga!')
     });
 
-    autoFocus(email);
+    changeLangBtn.addEventListener('click', changeLanguage);
+    form.addEventListener('click', checkBtnClick);
 });
 
-let $counter = {
-    inputClassNumber: 2,
-    swipe: 0
-};
+//unfortunate global variables, not sure if its possible to get rid of them :)
+let $scroll = 0;
+let $errorLangPack = {};
 
 const form = document.getElementById('form');
 const username = document.getElementById('username');
@@ -31,7 +32,10 @@ const passwordChecklist = form.querySelector('.password-checklist');
 const passStrength = document.querySelector('#pass-strength i');
 const formControls = document.querySelectorAll('.form-control')
 const submitCheckbox = document.getElementById('submit-checkbox');
+const changeLangBtn = document.getElementById('change-language');
+const wrapper = document.querySelector('.wrapper');
 
+// Create necesarry btns!
 const createBackBtns = () => {
     formControls.forEach(form => {
 
@@ -66,8 +70,58 @@ const createNextBtns = () => {
     });
 };
 
-createNextBtns();
-createBackBtns();
+// allow user to change language on site
+const setLang = input => {
+    wrapper.id = input;
+    fetch(`/lang/lang_${input}.json`)
+        .then(response => {
+            return response.json();
+        })
+        .then(data => {
+            for (const key in data) {
+                if (Object.hasOwnProperty.call(data, key)) {
+                    const element = data[key];
+                    const test = document.querySelector(key);
+                    test.innerHTML = element;
+                }
+            }
+        });
+    getErrorLang(input);
+};
+
+const changeLanguage = e => {
+    const language = e.target.textContent.trim();
+    if (language === 'EN') {
+        setLang('PL');
+    } else {
+        setLang('EN');
+    };
+};
+
+//change language of dynamically added error msgs
+const getErrorLang = lang => {
+    fetch(`/lang/error_${lang}.json`)
+        .then(response => {
+            return response.json();
+        })
+        .then(data => {
+            for (const key in data) {
+                if (Object.hasOwnProperty.call(data, key)) {
+                    $errorLangPack = data;
+                };
+            };
+        });
+};
+
+const setErrorMsg = input => {
+    for (const key in $errorLangPack) {
+        if (Object.hasOwnProperty.call($errorLangPack, key)) {
+            if (input === key) {
+                return $errorLangPack[key];
+            };
+        };
+    };
+};
 
 //Select input on page load
 const autoFocus = input => {
@@ -101,7 +155,7 @@ const basicValidator = (input, action) => {
 
 const getFieldName = (input) => {
     if (input.id === 'password2') {
-        return 'Musisz powtórzyć hasło'
+        return setErrorMsg("repeat-pass");
     };
 
     const txt = input.closest('.form-control').querySelector('.js-label').textContent.toLowerCase();
@@ -118,9 +172,9 @@ const showResult = (input, msg, logic) => {
 
 const checkLength = (input, min, max) => {
     if (input.value.length < min) {
-        showResult(input, `${getFieldName(input)} must have at least ${min} characters.`)
+        showResult(input, `${getFieldName(input)} ${setErrorMsg("too-short")} ${min} ${setErrorMsg("characters")}.`)
     } else if (input.value.length >= max) {
-        showResult(input, `${getFieldName(input)} can't be longer than ${max} characters.`)
+        showResult(input, `${getFieldName(input)} ${setErrorMsg("too-long")} ${max} ${setErrorMsg("characters")}.`)
     } else {
         showResult(input, '', true);
     };
@@ -132,7 +186,7 @@ const checkUsername = (input, min, max) => {
     if (re.test(String(input.value).trim())) {
         checkLength(input, min, max)
     } else {
-        showResult(input, `Only letters and numbers are allowed.`)
+        showResult(input, setErrorMsg("only-let-num"));
     };
 };
 
@@ -157,14 +211,15 @@ const calcAge = date => {
     if (age === 'NaN') {
         return
     } else if (age > 130 || age < 2) {
-        showResult(date, `You must enter valid date.`, false);
+        showResult(date, setErrorMsg("valid-date"), false);
     } else if (age < 16) {
-        showResult(date, `You must be at least 16 years old, be patient. :)`, false);
+        showResult(date, setErrorMsg("too-young"), false);
     } else {
         showResult(date, '', true);
     };
 };
 
+//change checklist items under password input
 const passwordChecklistTest = (input, output) => {
     input ? output.classList.add('great') : output.classList.remove('great')
 }
@@ -178,7 +233,6 @@ const passwordSuccessMsg = (input, msg, errorField, removeClass) => {
 };
 
 const checkPassword = (input, min) => {
-    // password tests
     const errorField = input.closest('.form-control').querySelector('.error-msg');
 
     const inputPass = password.value.trim();
@@ -191,11 +245,11 @@ const checkPassword = (input, min) => {
         input.classList.remove('input-great');
         input.classList.remove('input-okay');
         errorField.className = `error-msg`;
-        showResult(password, 'Too weak', false);
+        showResult(password, setErrorMsg("weak"), false);
     } else if (hasThreeUpperCase && hasThreeNumbers) {
-        passwordSuccessMsg(password, 'Great', errorField, 'input-okay');
+        passwordSuccessMsg(password, "Great", errorField, 'input-okay');
     } else {
-        passwordSuccessMsg(password, 'Okay', errorField, 'input-great');
+        passwordSuccessMsg(password, "Okay", errorField, 'input-great');
     };
 
     passwordChecklistTest((inputPass.length >= 8), document.querySelector('#pass-length i'));
@@ -211,6 +265,7 @@ const checkPasswordMatch = (input1, input2) => {
     showResult(input1, '', false);
 };
 
+//show password after clicking on liitle icon in the right corner of pass input
 const showPassword = button => {
     const showPasswordBtn = button.target.closest('span');
     const input = button.target.closest('.input-wrap').querySelector('.main-input');
@@ -223,19 +278,19 @@ const checkMessage = (input, min, max) => {
     const re = /^[^&[/{}$<>|]{0,}$/u;
 
     if (!re.test(String(input.value).trim())) {
-        return showResult(input, `You can't use special characters.`, false);
+        return showResult(input, setErrorMsg("message"), false);
     };
 
     checkLength(input, min, max);
 
 };
 
+//check all required inputs, listener is on "keyup" !
 const checkRequired = input => {
     input.preventDefault();
 
     const actualInput = input.target;
     const btn = input.target.closest('.form-control').querySelector('.next-page');
-
 
     if (input.key === 'Enter') {
         if (btn.classList.contains('btn-validate') && btn.id === 'message-btn') {
@@ -256,8 +311,8 @@ const checkRequired = input => {
             checkUsername(actualInput, 5, 15);
             break;
         case password:
-            checkPassword(actualInput, 8);
             checkPasswordMatch(confirmPassword, actualInput);
+            checkPassword(actualInput, 8);
             break;
         case confirmPassword:
             checkPasswordMatch(actualInput, password);
@@ -270,12 +325,11 @@ const checkRequired = input => {
 
 const submitForm = e => {
     e.preventDefault();
-    document.querySelectorAll('input').forEach(input => {
-        console.log(input.value);
-    })
     form.submit();
+    form.reset();
 };
 
+//check which button was clicked and take accurate action
 const checkBtnClick = input => {
     const formControl = input.target.closest('.form-control');
     const nextPageBtn = formControl.querySelector('.next-page');
@@ -306,6 +360,7 @@ const agreementConfirmation = (input) => {
     button.classList.toggle('btn-validate');
 };
 
+//switch page up or down, depend on action parameter
 const switchPage = (input, action) => {
     const formControl = input.target.closest('.form-control');
     formControl.querySelector('.main-input').blur();
@@ -315,10 +370,10 @@ const switchPage = (input, action) => {
         submitCheckbox.checked = false;
         document.getElementById('submit-btn').classList.remove('btn-validate');
         direction = formControl.previousElementSibling;
-        form.style.transform = `translateY(-${$counter.swipe -= 100}%)`;
+        form.style.transform = `translateY(-${$scroll -= 100}%)`;
     } else {
         direction = formControl.nextElementSibling;
-        form.style.transform = `translateY(-${$counter.swipe += 100}%)`;
+        form.style.transform = `translateY(-${$scroll += 100}%)`;
     };
 
     direction.classList.add('active');

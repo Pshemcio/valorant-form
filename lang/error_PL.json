@@ -1,0 +1,11 @@
+{
+    "valid-date": "Musisz wpisać poprawną datę.",
+    "too-young": "Musisz mieć conajmniej 16 lat, cierpliwości. :)",
+    "message": "Nie możesz używać znaków specjalnych.",
+    "repeat-pass": "Musisz powtórzyć hasło.",
+    "too-short": "musi mieć conajmniej",
+    "too-long": "może mieć maksymalnie",
+    "characters": "znaków",
+    "only-let-num": "Dozwolone są tylko liczby i litery.",
+    "weak": "Za słabe."
+}

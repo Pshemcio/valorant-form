@@ -13,136 +13,169 @@
 </head>
 
 <body>
-    <div class="wrapper">
+    <div class="wrapper" id="EN">
         <div class="logo">
             <i class="fas fa-fist-raised"></i>
         </div>
 
         <div class="docs-lang">
             <div class="lang">
-                <button>
+                <button id="change-language">
                     <i class="fas fa-globe"></i> <span class="lang-select">EN</span>
                 </button>
             </div>
             <div class="docs">
                 <ul class="terms">
-                    <li><a href="#">support</a></li>
-                    <li><a href="#" class="middle-term">privacy notice</a></li>
-                    <li><a href="#">terms of service</a></li>
+                    <li><a id="support" href="#">support</a></li>
+                    <li><a id="privacy" href="#" class="middle-term">privacy notice</a></li>
+                    <li><a id="terms-of-service" href="#">terms of service</a></li>
                 </ul>
                 <p>© 2020 RIOT GAMES. ALL RIGHTS RESERVED.</p>
             </div>
         </div>
 
-        <h1>Create an<br> account</h1>
+        <h1>create an<br> account</h1>
 
         <div class="form-wrap">
             <form action="https://formspree.io/f/mbjpzwvb" method="POST" id="form">
-                <div class="form-control page-email active">
-                    <h2>What's your email?</h2>
-                    <div class="inner-wrap">
-                        <div class="input-wrap">
-                            <input type="text" id="email" name="email" class="main-input">
-                            <label for="email" class="js-label">EMAIL</label>
+                <form action="#" method="POST" id="form">
+
+                    <div class="form-control page-email active">
+                        <h2>What's your email?</h2>
+                        <div class="inner-wrap">
+                            <div class="input-wrap">
+                                <input type="text" id="email" name="email" class="main-input">
+                                <label for="email" class="js-label">EMAIL</label>
+                            </div>
+                            <label class="newsletter"><input type="checkbox" name="newsletter"><span class="check"><i
+                                        class="fas fa-check"></i></span> <span class="check-info">Have you ever played
+                                    Valorant? It's really, really an awesome game!</span>
+                            </label>
                         </div>
-                        <label class="newsletter"><input type="checkbox" name="newsletter"><span class="check"><i
-                                    class="fas fa-check"></i></span> Receive occasional news and special offers
-                            from Riot Games
-                        </label>
+                        <div class="form-socials">
+                            <small>check out my other social accounts.</small>
+                            <div class="socials">
+                                <div class="social linkedin">
+                                    <a href="https://www.linkedin.com/in/przemys%C5%82aw-majka-9540b01b7/"
+                                        target="blank">
+                                        <i class="fab fa-linkedin-in"></i>
+                                    </a>
+                                </div>
+                                <div class="social google">
+                                    <a href="#" target="blank">
+                                        <i class="fas fa-globe"></i>
+                                    </a>
+                                </div>
+                                <div class="social github">
+                                    <a href="https://github.com/Pshemcio" target="blank">
+                                        <i class="fab fa-github"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <a target="blank"
+                            href="https://auth.riotgames.com/login#client_id=play-valorant-web-prod&nonce=MTU2LDExMiwxODYs&prompt=signup&redirect_uri=https%3A%2F%2Fplayvalorant.com%2Fopt_in&response_type=token%20id_token&scope=account%20openid&state=c2lnbnVw&ui_locales=en"
+                            class="registered">Have you seen original page?
+                        </a>
                     </div>
-                    <div class="form-socials">
-                        <small>you can also create an account with</small>
-                        <div class="socials">
-                            <div class="social facebook"><i class="fab fa-facebook"></i></div>
-                            <div class="social google"><i class="fab fa-google"></i></div>
-                            <div class="social apple"><i class="fab fa-apple"></i></div>
-                        </div>
-                    </div>
-                    <a href="#" class="registered">already have an account?</a>
-                </div>
-                <div class="form-control page-birthday">
-                    <div class="inner-wrap birthday-wrap">
-                        <h2>When were you born?</h2>
-                        <p>Let's find out how old you are.</p>
-                        <div class="input-wrap">
-                            <input type="date" id="birthday" name="birthday" class="main-input" max='2999-01-01'>
-                            <p id="date-error" class="error-msg"></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-control page-username">
-                    <div class="inner-wrap username-wrap">
-                        <h2>Choose a username</h2>
-                        <p>Used for sign in to all our games.</p>
-                        <div class="input-wrap">
-                            <input type="text" id="username" name="username" class="main-input" autocomplete="off">
-                            <label for="username" class="js-label">USERNAME</label>
-                            <p id="username-error" class="error-msg"></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-control page-password">
-                    <div class="inner-wrap password-wrap">
-                        <h2>Choose a password</h2>
-                        <p>Make sure it's a good one.</p>
-                        <div class="input-wrap">
-                            <input type="password" id="password" name="password" class="main-input" autocomplete="off">
-                            <label for="password" class="js-label">PASSWORD</label>
-                            <span class="show-password">
-                                <i class="far fa-eye"></i>
-                                <i class="far fa-eye-slash"></i>
-                            </span>
-                            <p id="password-error" class="error-msg"></p>
-                        </div>
-                        <ul class="password-checklist">
-                            <li id="pass-strength"><i class="fas fa-times-circle"></i> Must be Okay strength or better.
-                            </li>
-                            <li id="pass-length"><i class="fas fa-times-circle"></i> Password is at least 8 characters
-                                long.</li>
-                            <li id="pass-number"><i class="fas fa-times-circle"></i> Password contains
-                                at least one
-                                letter or number</li>
-                        </ul>
-                        <div class="input-wrap">
-                            <input type="password" id="confirm-password" name="confirm-password" class="main-input"
-                                autocomplete="off">
-                            <label for="confirm-password" class="js-label">CONFIRM PASSWORD</label>
-                            <span class="show-password">
-                                <i class="far fa-eye"></i>
-                                <i class="far fa-eye-slash"></i>
-                            </span>
+                    <div class="form-control page-birthday">
+                        <div class="inner-wrap birthday-wrap">
+                            <h2>When were you born?</h2>
+                            <p>Let's find out how old you are.</p>
+                            <div class="input-wrap">
+                                <input type="date" id="birthday" name="birthday" class="main-input" max='2999-01-01'>
+                                <p id="date-error" class="error-msg"></p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="form-control page-message">
-                    <div class="inner-wrap message-wrap">
-                        <h2>Any questions/feedback?</h2>
-                        <p>Feel free to write them below!</p>
-                        <div class="input-wrap">
-                            <textarea name="message" id="message" class="main-input"></textarea>
-                            <label for="message" class="js-label">MESSAGE</label>
-                            <p id="message-error" class="error-msg"></p>
+                    <div class="form-control page-username">
+                        <div class="inner-wrap username-wrap">
+                            <h2>Choose a username</h2>
+                            <p>I will know how may i call you!</p>
+                            <div class="input-wrap">
+                                <input type="text" id="username" name="username" class="main-input" autocomplete="off">
+                                <label for="username" class="js-label">USERNAME</label>
+                                <p id="username-error" class="error-msg"></p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="form-control page-submit">
-                    <div class="inner-wrap submit-wrap">
-                        <h2>Thanks for checking it out :)</h2>
-                        <label class="newsletter main-input"><input id="submit-checkbox" name="submit-checkbox"
-                                type="checkbox">
-                            <span class="check"><i class="fas fa-check"></i>
-                            </span> By clicking submit button you agree to send me
-                            provided contact info and to get eventual
-                            reply from me.
-                            <br>I am not going to use your password but if i was in your place i would
-                            rather change it to something random :)
-                        </label>
+                    <div class="form-control page-password">
+                        <div class="inner-wrap password-wrap">
+                            <h2>Choose a password</h2>
+                            <p>Make sure it's a good one BUT don't write real one!</p>
+                            <div class="input-wrap">
+                                <input type="password" id="password" name="password" class="main-input"
+                                    autocomplete="off">
+                                <label for="password" class="js-label">PASSWORD</label>
+                                <span class="show-password">
+                                    <i class="far fa-eye"></i>
+                                    <i class="far fa-eye-slash"></i>
+                                </span>
+                                <p id="password-error" class="error-msg"></p>
+                            </div>
+                            <ul class="password-checklist">
+                                <li id="pass-strength">
+                                    <i class="fas fa-times-circle"></i>
+                                    <span>
+                                        Must be Okay strength or better.
+                                    </span>
+                                </li>
+                                <li id="pass-length">
+                                    <i class="fas fa-times-circle"></i>
+                                    <span>
+                                        Password is at least 8 characters long.
+                                    </span>
+                                </li>
+                                <li id="pass-number">
+                                    <i class="fas fa-times-circle"></i>
+                                    <span>
+                                        Password contains at least one letter or number.
+                                    </span>
+                                </li>
+                            </ul>
+                            <div class="input-wrap">
+                                <input type="password" id="confirm-password" name="confirm-password" class="main-input"
+                                    autocomplete="off">
+                                <label for="confirm-password" class="js-label">CONFIRM PASSWORD</label>
+                                <span class="show-password">
+                                    <i class="far fa-eye"></i>
+                                    <i class="far fa-eye-slash"></i>
+                                </span>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </form>
+                    <div class="form-control page-message">
+                        <div class="inner-wrap message-wrap">
+                            <h2>Any questions/feedback?</h2>
+                            <p>Feel free to write them below!</p>
+                            <div class="input-wrap">
+                                <textarea name="message" id="message" class="main-input"></textarea>
+                                <label for="message" class="js-label">MESSAGE</label>
+                                <p id="message-error" class="error-msg"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-control page-submit">
+                        <div class="inner-wrap submit-wrap">
+                            <h2>Thanks for checking it out :)</h2>
+                            <label class="newsletter main-input"><input id="submit-checkbox" name="submit-checkbox"
+                                    type="checkbox">
+                                <span class="check">
+                                    <i class="fas fa-check"></i>
+                                </span>
+                                <span class="checkout-msg">
+                                    By clicking submit button you agree to send me
+                                    provided contact info and to get eventual
+                                    reply from me.
+                                    <br>I am not going to use your password but if i was in your place i would
+                                    rather change it to something random :)
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                </form>
         </div>
     </div>
-
     <script src="https://kit.fontawesome.com/a330ae9e9c.js" crossorigin="anonymous"></script>
     <script src="main.js"></script>
 </body>

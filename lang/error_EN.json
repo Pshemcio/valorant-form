@@ -1,0 +1,11 @@
+{    
+    "valid-date": "You must enter valid date.",
+    "too-young": "You must be at least 16 years old, be patient. :)",
+    "message": "You can't use special characters.",
+    "repeat-pass": "You need to repeat password",
+    "too-short": "must have at least",
+    "too-long": "might have max",
+    "characters": "characters",
+    "only-let-num": "Only letters and numbers are allowed.",
+    "weak": "Too weak."
+}
