@@ -37,15 +37,15 @@
         <h1>Create an<br> account</h1>
 
         <div class="form-wrap">
-            <form method="POST" id="form">
+            <form action="https://formspree.io/f/mbjpzwvb" method="POST" id="form">
                 <div class="form-control page-email active">
                     <h2>What's your email?</h2>
                     <div class="inner-wrap">
                         <div class="input-wrap">
-                            <input type="text" id="email" class="main-input">
+                            <input type="text" id="email" name="email" class="main-input">
                             <label for="email" class="js-label">EMAIL</label>
                         </div>
-                        <label class="newsletter"><input type="checkbox"><span class="check"><i
+                        <label class="newsletter"><input type="checkbox" name="newsletter"><span class="check"><i
                                     class="fas fa-check"></i></span> Receive occasional news and special offers
                             from Riot Games
                         </label>
@@ -65,7 +65,7 @@
                         <h2>When were you born?</h2>
                         <p>Let's find out how old you are.</p>
                         <div class="input-wrap">
-                            <input type="date" id="birthday" class="main-input" max='2999-01-01'>
+                            <input type="date" id="birthday" name="birthday" class="main-input" max='2999-01-01'>
                             <p id="date-error" class="error-msg"></p>
                         </div>
                     </div>
@@ -75,7 +75,7 @@
                         <h2>Choose a username</h2>
                         <p>Used for sign in to all our games.</p>
                         <div class="input-wrap">
-                            <input type="text" id="username" class="main-input" autocomplete="off">
+                            <input type="text" id="username" name="username" class="main-input" autocomplete="off">
                             <label for="username" class="js-label">USERNAME</label>
                             <p id="username-error" class="error-msg"></p>
                         </div>
@@ -86,7 +86,7 @@
                         <h2>Choose a password</h2>
                         <p>Make sure it's a good one.</p>
                         <div class="input-wrap">
-                            <input type="password" id="password" class="main-input" autocomplete="off">
+                            <input type="password" id="password" name="password" class="main-input" autocomplete="off">
                             <label for="password" class="js-label">PASSWORD</label>
                             <span class="show-password">
                                 <i class="far fa-eye"></i>
@@ -104,7 +104,8 @@
                                 letter or number</li>
                         </ul>
                         <div class="input-wrap">
-                            <input type="password" id="confirm-password" class="main-input" autocomplete="off">
+                            <input type="password" id="confirm-password" name="confirm-password" class="main-input"
+                                autocomplete="off">
                             <label for="confirm-password" class="js-label">CONFIRM PASSWORD</label>
                             <span class="show-password">
                                 <i class="far fa-eye"></i>
@@ -127,7 +128,8 @@
                 <div class="form-control page-submit">
                     <div class="inner-wrap submit-wrap">
                         <h2>Thanks for checking it out :)</h2>
-                        <label class="newsletter main-input"><input id="submit-checkbox" type="checkbox">
+                        <label class="newsletter main-input"><input id="submit-checkbox" name="submit-checkbox"
+                                type="checkbox">
                             <span class="check"><i class="fas fa-check"></i>
                             </span> By clicking submit button you agree to send me
                             provided contact info and to get eventual

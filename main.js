@@ -273,7 +273,7 @@ const submitForm = e => {
     document.querySelectorAll('input').forEach(input => {
         console.log(input.value);
     })
-    // form.submit();
+    form.submit();
 };
 
 const checkBtnClick = input => {
