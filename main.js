@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     //Event listeners
-    inputs.forEach(input => {
+    mainInputs.forEach(input => {
         input.addEventListener('keyup', checkRequired)
         input.addEventListener('focus', movePlaceholderUp);
         input.addEventListener('blur', movePlaceholderBack);
@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     form.addEventListener('click', checkBtnClick);
     form.addEventListener('submit', () => {
         alert('uwaga!')
-    })
+    });
 
     autoFocus(email);
 });
@@ -26,12 +26,48 @@ const birthday = document.getElementById('birthday');
 const password = document.getElementById('password');
 const confirmPassword = document.getElementById('confirm-password');
 const message = document.getElementById('message');
-const inputs = form.querySelectorAll('.main-input');
-const submitBtn = document.getElementById('submit-btn');
+const mainInputs = form.querySelectorAll('.main-input');
 const passwordChecklist = form.querySelector('.password-checklist');
 const passStrength = document.querySelector('#pass-strength i');
-const backBtn = document.getElementById('back-btn');
+const formControls = document.querySelectorAll('.form-control')
 const submitCheckbox = document.getElementById('submit-checkbox');
+
+const createBackBtns = () => {
+    formControls.forEach(form => {
+
+        if (form.classList.contains('page-email')) {
+            return;
+        };
+
+        const backBtn = document.createElement('button');
+        backBtn.setAttribute('type', 'button');
+        backBtn.className = 'back-btn';
+        backBtn.innerHTML = '<i class="fas fa-arrow-up"></i>';
+
+        form.appendChild(backBtn);
+    });
+};
+
+const createNextBtns = () => {
+    formControls.forEach(form => {
+        const btnId = form.classList[1].slice(5,) + '-btn';
+        const nextBtn = document.createElement('button');
+
+        nextBtn.setAttribute('type', 'button');
+        nextBtn.id = btnId;
+        nextBtn.className = 'next-page';
+        nextBtn.innerHTML = '<i class="fas fa-arrow-right"></i>';
+
+        if (nextBtn.id === 'submit-btn') {
+            nextBtn.textContent = 'Submit!';
+        }
+
+        form.appendChild(nextBtn);
+    });
+};
+
+createNextBtns();
+createBackBtns();
 
 //Select input on page load
 const autoFocus = input => {
@@ -112,11 +148,11 @@ const checkEmail = input => {
 };
 
 const calcAge = date => {
-    const birthday = new Date(date.value);
+    const dateOfBirth = new Date(date.value);
     const today = new Date();
 
-    const age = ((today - birthday) / 31557600000).toFixed(2);
-    birthday.max = new Date().toISOString().split("T")[0];
+    const age = ((today - dateOfBirth) / 31557600000).toFixed(2);
+    dateOfBirth.max = new Date().toISOString().split("T")[0];
 
     if (age === 'NaN') {
         return
@@ -205,7 +241,7 @@ const checkRequired = input => {
         if (btn.classList.contains('btn-validate') && btn.id === 'message-btn') {
             return;
         } else if (btn.classList.contains('btn-validate')) {
-            switchPage(input);
+            switchPage(input, false);
         };
     };
 
@@ -221,6 +257,7 @@ const checkRequired = input => {
             break;
         case password:
             checkPassword(actualInput, 8);
+            checkPasswordMatch(confirmPassword, actualInput);
             break;
         case confirmPassword:
             checkPasswordMatch(actualInput, password);
@@ -233,15 +270,21 @@ const checkRequired = input => {
 
 const submitForm = e => {
     e.preventDefault();
-    inputs.forEach(input => {
-        console.log(input.value)
+    document.querySelectorAll('input').forEach(input => {
+        console.log(input.value);
     })
-    form.submit();
+    // form.submit();
 };
 
 const checkBtnClick = input => {
     const formControl = input.target.closest('.form-control');
     const nextPageBtn = formControl.querySelector('.next-page');
+    const backBtn = formControl.querySelector('.back-btn');
+    const submitBtn = document.getElementById('submit-btn');
+
+    if (input.target === backBtn) {
+        return switchPage(input, true);
+    };
 
     if (input.target === submitBtn) {
         return submitForm(input);
@@ -252,7 +295,7 @@ const checkBtnClick = input => {
     };
 
     if (input.target === nextPageBtn) {
-        switchPage(input);
+        switchPage(input, false);
     } else if (input.target.classList.contains('show-password')) {
         showPassword(input);
     };
@@ -260,18 +303,27 @@ const checkBtnClick = input => {
 
 const agreementConfirmation = (input) => {
     const button = input.closest('.form-control').querySelector('.next-page');
-    input.classList.toggle('test');
     button.classList.toggle('btn-validate');
 };
 
-const switchPage = input => {
+const switchPage = (input, action) => {
     const formControl = input.target.closest('.form-control');
-
     formControl.querySelector('.main-input').blur();
-    formControl.nextElementSibling.classList.toggle('active');
-    form.style.transform = `translateY(-${$counter.swipe += 100}%)`;
+    let direction;
+
+    if (action) {
+        submitCheckbox.checked = false;
+        document.getElementById('submit-btn').classList.remove('btn-validate');
+        direction = formControl.previousElementSibling;
+        form.style.transform = `translateY(-${$counter.swipe -= 100}%)`;
+    } else {
+        direction = formControl.nextElementSibling;
+        form.style.transform = `translateY(-${$counter.swipe += 100}%)`;
+    };
+
+    direction.classList.add('active');
     setTimeout(() => {
-        formControl.classList.toggle('active');
-        autoFocus(form.querySelector(`.input${$counter.inputClassNumber++}`));
+        formControl.classList.remove('active');
+        autoFocus(direction.querySelector('.main-input'));
     }, 200);
 };

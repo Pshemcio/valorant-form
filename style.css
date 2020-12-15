@@ -11,7 +11,7 @@
     font-family: 'Montserrat', sans-serif;
 }
 
-.next-page>*,
+button>*,
 .show-password>* {
     pointer-events: none;
 }
@@ -139,6 +139,7 @@ h1 {
 }
 
 .form-wrap {
+    position: relative;
     background-color: #f9f9f9;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
     width: 30vw;
@@ -156,6 +157,7 @@ h1 {
 }
 
 .form-control {
+    position: relative;
     height: 100%;
     display: flex;
     flex-flow: column nowrap;
@@ -177,7 +179,7 @@ h1 {
     width: 100%;
     padding: 1.4vw 1.1vw .6vw;
     font-size: 1.1vw;
-    margin-bottom: 10px;
+    margin-bottom: 1vw;
     border-radius: .2vw;
     border: 1px solid var(--input-color);
     background-color: var(--input-color);
@@ -230,18 +232,18 @@ h1 {
 }
 
 .newsletter input {
-    margin-right: 1.3vw;
+    margin-right: 1.2vw;
     visibility: hidden;
 }
 
 .newsletter .check {
     position: absolute;
-    top: 0;
+    top: .3vw;
     left: 0;
-    height: 21px;
-    width: 21px;
+    height: 1.5vw;
+    width: 1.5vw;
     background-color: var(--input-color);
-    border-radius: 6px;
+    border-radius: .3vw;
     display: grid;
     place-content: center;
     color: transparent;
@@ -317,9 +319,9 @@ h1 {
 }
 
 .next-page,
-#back-btn {
+.back-btn {
     border: 1px solid var(--input-color);
-    border-radius: 20px;
+    border-radius: .9vw;
     cursor: pointer;
     transition: background-color .4s, color .4s;
     outline: none;
@@ -328,6 +330,7 @@ h1 {
 }
 
 .next-page {
+    margin-bottom: 3vw;
     width: 5vw;
     height: 5vw;
     color: var(--input-color);
@@ -335,24 +338,35 @@ h1 {
     pointer-events: none;
 }
 
-#back-btn {
+.page-email>a {
+    order: 1;
+}
+
+.page-email .next-page {
+    margin-bottom: 0;
+    order: 0;
+}
+
+.back-btn {
     position: absolute;
     top: 1.5vw;
     right: 1.5vw;
+    z-index: 2;
     width: 3.3vw;
     height: 3.3vw;
     font-size: 1.4vw;
+    cursor: pointer;
 }
 
 .btn-validate,
-#back-btn {
+.back-btn {
     pointer-events: all;
     background-color: #FF4654;
     color: white;
 }
 
 .btn-validate:hover,
-#back-btn:hover {
+.back-btn:hover {
     background-color: #e4414e;
 }
 
@@ -430,18 +444,14 @@ input[type='date']:focus {
     background: pink;
 } */
 
-#birthday-btn {
+/* #birthday-btn {
     margin-bottom: 30px;
-}
+} */
 
 h2+p {
     margin: 15px 0 30px;
     color: #999;
     font-size: 1.4vw;
-}
-
-.smaller-pages {
-    margin-bottom: 50px;
 }
 
 .error-msg {
@@ -524,8 +534,15 @@ h2+p {
 }
 
 .submit-wrap .newsletter {
-    margin-top: 2vw;
+    margin-top: 1vw;
     line-height: 2em;
+    background-color: transparent;
+    border: none;
+    user-select: none
+}
+
+.submit-wrap .check {
+    margin-top: 1.8vw;
 }
 
 #submit-btn {

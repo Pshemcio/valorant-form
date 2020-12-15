@@ -38,14 +38,11 @@
 
         <div class="form-wrap">
             <form method="POST" id="form">
-                <button type="button" id="back-btn" class="back-btn">
-                    <i class="fas fa-arrow-up"></i>
-                </button>
-                <div class="form-control active page-email">
+                <div class="form-control page-email active">
                     <h2>What's your email?</h2>
                     <div class="inner-wrap">
                         <div class="input-wrap">
-                            <input type="text" id="email" class="input1 main-input">
+                            <input type="text" id="email" class="main-input">
                             <label for="email" class="js-label">EMAIL</label>
                         </div>
                         <label class="newsletter"><input type="checkbox"><span class="check"><i
@@ -61,9 +58,6 @@
                             <div class="social apple"><i class="fab fa-apple"></i></div>
                         </div>
                     </div>
-                    <button type="button" id="email-btn" class="next-page">
-                        <i class="fas fa-arrow-right"></i>
-                    </button>
                     <a href="#" class="registered">already have an account?</a>
                 </div>
                 <div class="form-control page-birthday">
@@ -71,34 +65,28 @@
                         <h2>When were you born?</h2>
                         <p>Let's find out how old you are.</p>
                         <div class="input-wrap">
-                            <input type="date" id="birthday" class="input2 main-input" max='2999-01-01'>
+                            <input type="date" id="birthday" class="main-input" max='2999-01-01'>
                             <p id="date-error" class="error-msg"></p>
                         </div>
                     </div>
-                    <button type="button" id="birthday-btn" class="next-page smaller-pages">
-                        <i class="fas fa-arrow-right"></i>
-                    </button>
                 </div>
                 <div class="form-control page-username">
                     <div class="inner-wrap username-wrap">
                         <h2>Choose a username</h2>
                         <p>Used for sign in to all our games.</p>
                         <div class="input-wrap">
-                            <input type="text" id="username" class="input3 main-input" autocomplete="off">
+                            <input type="text" id="username" class="main-input" autocomplete="off">
                             <label for="username" class="js-label">USERNAME</label>
                             <p id="username-error" class="error-msg"></p>
                         </div>
                     </div>
-                    <button type="button" id="username-btn" class="next-page smaller-pages">
-                        <i class="fas fa-arrow-right"></i>
-                    </button>
                 </div>
                 <div class="form-control page-password">
                     <div class="inner-wrap password-wrap">
                         <h2>Choose a password</h2>
                         <p>Make sure it's a good one.</p>
                         <div class="input-wrap">
-                            <input type="password" id="password" class="input4 main-input" autocomplete="off">
+                            <input type="password" id="password" class="main-input" autocomplete="off">
                             <label for="password" class="js-label">PASSWORD</label>
                             <span class="show-password">
                                 <i class="far fa-eye"></i>
@@ -116,7 +104,7 @@
                                 letter or number</li>
                         </ul>
                         <div class="input-wrap">
-                            <input type="password" id="confirm-password" class=" main-input" autocomplete="off">
+                            <input type="password" id="confirm-password" class="main-input" autocomplete="off">
                             <label for="confirm-password" class="js-label">CONFIRM PASSWORD</label>
                             <span class="show-password">
                                 <i class="far fa-eye"></i>
@@ -124,28 +112,22 @@
                             </span>
                         </div>
                     </div>
-                    <button type="button" id="password-btn" class="next-page smaller-pages">
-                        <i class="fas fa-arrow-right"></i>
-                    </button>
                 </div>
                 <div class="form-control page-message">
                     <div class="inner-wrap message-wrap">
                         <h2>Any questions/feedback?</h2>
                         <p>Feel free to write them below!</p>
                         <div class="input-wrap">
-                            <textarea name="message" id="message" class="input5 main-input"></textarea>
+                            <textarea name="message" id="message" class="main-input"></textarea>
                             <label for="message" class="js-label">MESSAGE</label>
                             <p id="message-error" class="error-msg"></p>
                         </div>
                     </div>
-                    <button type="button" id="message-btn" class="next-page smaller-pages"><i
-                            class="fas fa-arrow-right"></i>
-                    </button>
                 </div>
                 <div class="form-control page-submit">
                     <div class="inner-wrap submit-wrap">
                         <h2>Thanks for checking it out :)</h2>
-                        <label class="newsletter input6"><input id="submit-checkbox" type="checkbox">
+                        <label class="newsletter main-input"><input id="submit-checkbox" type="checkbox">
                             <span class="check"><i class="fas fa-check"></i>
                             </span> By clicking submit button you agree to send me
                             provided contact info and to get eventual
@@ -154,9 +136,6 @@
                             rather change it to something random :)
                         </label>
                     </div>
-                    <button type="button" id="submit-btn" class="next-page smaller-pages">
-                        Submit!
-                    </button>
                 </div>
             </form>
         </div>
