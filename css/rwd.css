@@ -1,0 +1,157 @@
+@media (max-width: 992px) {
+    :root {
+        font-size: 3.5vw;
+    }
+
+    .wrapper::before {
+        background: linear-gradient(rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, .5)), url(../img/main-bg-s.jpg);
+        background-size: cover;
+        background-position: 40% 0;
+    }
+
+    .docs {
+        position: relative;
+    }
+
+    h1 {
+        left: 0;
+        bottom: 0;
+        position: relative;
+        text-align: center;
+        width: 100%;
+        font-size: 2.3rem;
+        letter-spacing: -.2rem;
+    }
+
+    .form-control h2 {
+        text-align: center;
+        margin: 1.6rem 0 .8rem;
+    }
+
+    .form-socials small {
+        font-size: .7rem;
+    }
+
+    .docs-lang {
+        position: static;
+        order: 1;
+    }
+
+    .wrapper {
+        flex-direction: column;
+        justify-content: flex-start;
+        padding: 4.6rem .3rem 3rem;
+    }
+
+    .logo,
+    .lang {
+        position: absolute;
+        top: 30px;
+    }
+
+    .logo {
+        left: 10px;
+        height: 2.5rem;
+        width: 2.5rem;
+        font-size: 1.6rem;
+        color: rgb(9, 9, 32);
+    }
+
+    .lang {
+        right: 10px;
+    }
+
+    .lang button {
+        border: .2rem solid rgba(156, 75, 75, 0.753);
+        font-size: .8rem;
+        padding: .5rem .7rem;
+    }
+
+    .lang-select {
+        font-family: 'Montserrat', sans-serif;
+    }
+
+    .docs {
+        font-size: .5rem;
+        text-align: center;
+    }
+
+    .form-wrap {
+        width: 95vw;
+        height: 34rem;
+        margin: 3rem 0 1.5rem;
+    }
+
+    .back-btn {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+    }
+}
+
+@media (max-width: 992px) and (orientation:landscape) {
+    :root {
+        font-size: 2.9vw;
+    }
+
+    .form-wrap {
+        width: 85vw;
+        height: 34rem;
+        margin: 3rem 0 1.5rem;
+    }
+}
+
+@media (max-width: 688px) {
+    :root {
+        font-size: 3.5vw;
+    }
+
+    .docs {
+        font-size: .8rem;
+    }
+}
+
+/* breakpoint for wierd, thin phones like iphone X !!!!!!!!!!!!!!!!!*/
+@media (max-width: 400px) and (min-height:800px) {
+    .form-wrap {
+        height: 40rem;
+    }
+}
+
+/* Large screens !!!!!!!!!!!!! */
+@media (min-width:1566px) {
+    :root {
+        font-size: 20px;
+    }
+
+    .form-wrap {
+        width: 28rem;
+        height: 38rem;
+    }
+
+    .docs-lang {
+        font-size: .6rem;
+    }
+
+    .submit-wrap .newsletter {
+        line-height: 1.6rem;
+    }
+}
+
+@media (min-width:2500px) {
+    :root {
+        font-size: 22px;
+    }
+}
+
+@media (min-width:3100px) {
+    :root {
+        font-size: 30px;
+    }
+}
+
+@media (min-width:4000px) {
+    :root {
+        font-size: 40px;
+    }
+}

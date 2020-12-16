@@ -13,6 +13,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     changeLangBtn.addEventListener('click', changeLanguage);
     form.addEventListener('click', checkBtnClick);
+    console.log(window.screen.height)
+    console.log(window.screen.width)
 });
 
 //unfortunate global variables, not sure if its possible to get rid of them :)
@@ -399,28 +401,3 @@ const switchPage = (input, action) => {
         autoFocus(direction.querySelector('.main-input'));
     }, 200);
 };
-
-
-
-// const switchPage = (input, action) => {
-//     const formControl = input.target.closest('.form-control');
-//     formControl.querySelector('.main-input').blur();
-//     input.target.blur();
-//     let direction;
-
-//     if (action) {
-//         submitCheckbox.checked = false;
-//         document.getElementById('submit-btn').classList.remove('btn-validate');
-//         direction = formControl.previousElementSibling;
-//         form.style.transform = `translateY(-${$scroll -= 100}%)`;
-//     } else {
-//         direction = formControl.nextElementSibling;
-//         form.style.transform = `translateY(-${$scroll += 100}%)`;
-//     };
-
-//     direction.classList.add('active');
-//     setTimeout(() => {
-//         formControl.classList.remove('active');
-//         autoFocus(direction.querySelector('.main-input'));
-//     }, 200);
-// };
