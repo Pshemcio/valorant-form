@@ -94,8 +94,27 @@
                                 <h2>When were you born?</h2>
                                 <p>Let's find out how old you are.</p>
                                 <div class="input-wrap">
-                                    <input type="date" id="birthday" name="birthday" class="main-input"
+                                    <input type="number" id="birthday" name="birthday" class="main-input"
                                         max='2999-01-01'>
+                                    <label for="birthday" class="js-label">BIRTHDATE</label>
+                                    <div class="birthdate hide-date">
+                                        <div class="inner-birthdate">
+                                            <input id="day" class="main-input date-input" name="day" type="number"
+                                                placeholder="DD">
+                                            <label for="day" class="js-label">DAY</label>
+                                        </div>
+                                        <div class="inner-birthdate">
+                                            <input id="month" class="main-input date-input" name="month" type="number"
+                                                placeholder="MM">
+                                            <label for="month" class="js-label">month</label>
+                                        </div>
+                                        <div class="inner-birthdate">
+                                            <input id="year" class="main-input date-input" name="year" type="number"
+                                                placeholder="YYYY">
+                                            <label for="year" class="js-label">year</label>
+                                        </div>
+
+                                    </div>
                                     <p id="date-error" class="error-msg"></p>
                                 </div>
                             </div>

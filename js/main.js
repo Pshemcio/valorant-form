@@ -6,11 +6,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //Event listeners
     mainInputs.forEach(input => {
-        input.addEventListener('keyup', checkRequired)
+        // input.addEventListener('change', checkRequired);
+        input.addEventListener('keyup', checkRequired);
         input.addEventListener('focus', movePlaceholderUp);
         input.addEventListener('blur', movePlaceholderBack);
     });
 
+    birthdate.addEventListener('keyup', setBirthDate);
+    birthday.addEventListener('focus', focusOnDay);
+    day.addEventListener('blur', focusOnDay);
     changeLangBtn.addEventListener('click', changeLanguage);
     form.addEventListener('click', checkBtnClick);
 });
@@ -18,6 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
 //unfortunate global variables, not sure if its possible to get rid of them :)
 let $scroll = 0;
 let $errorLangPack = {};
+let $age = [];
 
 const form = document.getElementById('form');
 const username = document.getElementById('username');
@@ -33,6 +38,8 @@ const formControls = document.querySelectorAll('.form-control')
 const submitCheckbox = document.getElementById('submit-checkbox');
 const changeLangBtn = document.getElementById('change-language');
 const wrapper = document.querySelector('.wrapper');
+const day = document.getElementById('day');
+const birthdate = form.querySelector('.birthdate')
 
 // Create necesarry btns!
 const createBackBtns = () => {
@@ -90,22 +97,6 @@ const setLang = input => {
         }
     }
 
-
-    // following is wrong because i am using local JSON files :)
-
-    // fetch(`lang/lang_${input}.json`)
-    //     .then(response => {
-    //         return response.json();
-    //     })
-    //     .then(data => {
-    //         for (const key in data) {
-    //             if (Object.hasOwnProperty.call(data, key)) {
-    //                 const text = data[key];
-    //                 const textContent = document.querySelector(key);
-    //                 textContent.innerHTML = text;
-    //             }
-    //         }
-    //     });
     getErrorLang(input);
 };
 
@@ -127,20 +118,6 @@ const getErrorLang = lang => {
         case 'PL':
             $errorLangPack = error_PL;
     };
-
-    // again, problem with local json
-
-    // fetch(`lang/error_${lang}.json`)
-    //     .then(response => {
-    //         return response.json();
-    //     })
-    //     .then(data => {
-    //         for (const key in data) {
-    //             if (Object.hasOwnProperty.call(data, key)) {
-    //                 $errorLangPack = data;
-    //             };
-    //         };
-    //     });
 };
 
 const setErrorMsg = input => {
@@ -231,9 +208,17 @@ const checkEmail = input => {
     };
 };
 
+const setBirthDate = input => {
+    const actualInput = input.target;
+    // $age : tablica gdzie musisz pushować czasy
+    console.log(actualInput);
+};
+
 const calcAge = date => {
-    const dateOfBirth = new Date(date.value);
+    // wymagany format : "1970-01-01" ;
+    const dateOfBirth = new Date(date);
     const today = new Date();
+    console.log(dateOfBirth)
 
     const age = ((today - dateOfBirth) / 31557600000).toFixed(2);
     dateOfBirth.max = new Date().toISOString().split("T")[0];
@@ -318,7 +303,6 @@ const checkMessage = (input, min, max) => {
 //check all required inputs, listener is on "keyup" !
 const checkRequired = input => {
     input.preventDefault();
-
     const actualInput = input.target;
     const btn = input.target.closest('.form-control').querySelector('.next-page');
 
@@ -336,9 +320,9 @@ const checkRequired = input => {
         case email:
             checkEmail(actualInput);
             break;
-        case birthday:
-            calcAge(actualInput);
-            break;
+        // case birthday:
+        //     calcAge(actualInput);
+        //     break;
         case username:
             checkUsername(actualInput, 5, 15);
             break;
@@ -429,3 +413,20 @@ const switchPage = (input, action) => {
         autoFocus(direction.querySelector('.main-input'));
     }, 200);
 };
+
+const focusOnDay = input => {
+    const dayInput = document.getElementById('day');
+    const birthDate = document.querySelector('.birthdate')
+
+    if (input.type === 'focus') {
+        birthDate.classList.toggle('show-date');
+        birthDate.classList.toggle('hide-date');
+        dayInput.focus();
+    } else {
+        if (dayInput.value === '') {
+            birthDate.classList.toggle('show-date');
+            birthDate.classList.toggle('hide-date');
+        };
+    };
+};
+

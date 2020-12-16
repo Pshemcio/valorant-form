@@ -1,7 +1,7 @@
 :root {
     font-size: 1vw;
     --error-color: #cd26f777;
-    --input-color: rgba(219, 219, 219, 0.2);
+    --input-color: #e9eff0;
 }
 
 * {
@@ -210,7 +210,7 @@ h2+p {
 
 .main-input.input-active,
 .main-input.input-active:focus {
-    background-color: transparent;
+    background-color: #f9f9f9;
 }
 
 .input-wrap label {
@@ -370,6 +370,8 @@ h2+p {
     margin-top: 50px;
 }
 
+/* DO ZMIANY !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
+
 input[type='date'] {
     width: 100%;
     appearance: none;
@@ -387,8 +389,8 @@ input[type='date']:focus {
 }
 
 /* remove default type={'date'} input parts */
-::-webkit-datetime-edit-text {
-    padding: 0 .7rem;
+/* ::-webkit-datetime-edit-text {
+    padding: 0 2rem;
 }
 
 ::-webkit-datetime-edit-month-field {
@@ -401,15 +403,15 @@ input[type='date']:focus {
 
 ::-webkit-datetime-edit-year-field {
     text-transform: uppercase;
-}
+} */
 
-::-webkit-inner-spin-button {
+/* ::-webkit-calendar-picker-indicator {
     display: none;
-}
+} */
 
-::-webkit-calendar-picker-indicator {
+/* ::-webkit-calendar-picker {
     display: none;
-}
+} */
 
 
 /* DOM JS modified content styling !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  */
@@ -584,4 +586,87 @@ input[type='date']:focus {
 
 .js-label {
     text-transform: uppercase;
+}
+
+#birthday {
+    position: relative;
+    z-index: 0;
+    background-color: #e9eff0;
+}
+
+.birthdate {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.birthdate.hide-date {
+    animation: animateOpacity .5s linear both;
+}
+
+.birthdate.show-date {
+    z-index: 1;
+}
+
+.inner-birthdate {
+    position: relative;
+    flex-basis: 33.33%;
+}
+
+.inner-birthdate:nth-of-type(2)::after,
+.inner-birthdate:nth-of-type(2)::before {
+    position: absolute;
+    top: 20%;
+    right: 0;
+    content: '';
+    display: block;
+    width: 1px;
+    height: 2rem;
+    background-color: #cecece;
+}
+
+.inner-birthdate:nth-of-type(2)::before {
+    left: 0;
+}
+
+.date-input {
+    outline: none;
+    border-radius: 0;
+}
+
+.date-input::placeholder {
+    opacity: 0;
+    transition: .2s;
+    color: #cecece;
+}
+
+.date-input:focus::placeholder {
+    opacity: 1;
+}
+
+.date-input+label,
+#birthday+label {
+    left: 2.5rem;
+}
+
+.date-input.input-active~label {
+    transform: translate(-2rem, -1.7rem);
+}
+
+@keyframes animateOpacity {
+    0% {
+        opacity: 1;
+    }
+
+    40% {
+        opacity: 0;
+    }
+
+    100% {
+        z-index: -1;
+    }
 }

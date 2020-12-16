@@ -90,12 +90,16 @@
 }
 
 @media (max-width: 600px) {
+    :root {
+        font-size: 4vw;
+    }
+
     .form-wrap {
         height: 38rem;
     }
 
     .form-control {
-        padding: 2.2rem 3.6rem 1rem;
+        padding: 2.2rem 2rem 1rem;
     }
 }
 
