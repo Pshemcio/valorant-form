@@ -342,9 +342,8 @@ const confirmByKeySpace = checkbox => {
 
 const submitForm = e => {
     e.preventDefault();
-    // form.submit();
-    // form.reset();
-    alert(e.target)
+    form.submit();
+    form.reset();
 };
 
 //check which button was clicked and take accurate action

@@ -130,7 +130,7 @@ input[type=number] {
 
 .lang button:hover,
 .lang button:focus {
-    border: 3em solid #ff515f;
+    border: .3em solid #ff515f;
 }
 
 .lang-select {
@@ -327,15 +327,15 @@ h2+p {
     background-color: #0582d6;
 }
 
-.google {
+.website {
     background-color: #fff;
 }
 
-.google a {
-    color: tomato;
+.website a {
+    color: #fd5075;
 }
 
-.google:hover {
+.website:hover {
     background-color: #e9e9e9;
 }
 
