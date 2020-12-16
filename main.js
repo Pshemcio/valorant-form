@@ -3,7 +3,6 @@ document.addEventListener('DOMContentLoaded', () => {
     setLang('EN');
     createNextBtns();
     createBackBtns();
-    autoFocus(email);
 
     //Event listeners
     mainInputs.forEach(input => {
@@ -80,9 +79,9 @@ const setLang = input => {
         .then(data => {
             for (const key in data) {
                 if (Object.hasOwnProperty.call(data, key)) {
-                    const element = data[key];
-                    const test = document.querySelector(key);
-                    test.innerHTML = element;
+                    const text = data[key];
+                    const textContent = document.querySelector(key);
+                    textContent.innerHTML = text;
                 }
             }
         });
@@ -295,6 +294,8 @@ const checkRequired = input => {
     if (input.key === 'Enter') {
         if (btn.classList.contains('btn-validate') && btn.id === 'message-btn') {
             return;
+        } else if (btn.classList.contains('btn-validate') && btn.id === 'submit-btn') {
+            return;
         } else if (btn.classList.contains('btn-validate')) {
             switchPage(input, false);
         };
@@ -320,13 +321,28 @@ const checkRequired = input => {
         case message:
             checkMessage(actualInput, 5, 200);
             break;
+        case submitCheckbox:
+            confirmByKeySpace(input);
+            break;
+    };
+};
+
+const confirmByKeySpace = checkbox => {
+    if (checkbox.key !== ' ') {
+        return;
+    };
+    checkbox.target.checked === false ? checkbox.target.checked = true : checkbox.target.checked = false;
+
+    if (submitCheckbox.checked || submitCheckbox.checked === false) {
+        agreementConfirmation(submitCheckbox);
     };
 };
 
 const submitForm = e => {
     e.preventDefault();
-    form.submit();
-    form.reset();
+    // form.submit();
+    // form.reset();
+    alert(e.target)
 };
 
 //check which button was clicked and take accurate action
@@ -360,10 +376,11 @@ const agreementConfirmation = (input) => {
     button.classList.toggle('btn-validate');
 };
 
-//switch page up or down, depend on action parameter
+//switch page up or down, if action === true => slide down else slide up
 const switchPage = (input, action) => {
     const formControl = input.target.closest('.form-control');
     formControl.querySelector('.main-input').blur();
+    input.target.blur();
     let direction;
 
     if (action) {
@@ -382,3 +399,28 @@ const switchPage = (input, action) => {
         autoFocus(direction.querySelector('.main-input'));
     }, 200);
 };
+
+
+
+// const switchPage = (input, action) => {
+//     const formControl = input.target.closest('.form-control');
+//     formControl.querySelector('.main-input').blur();
+//     input.target.blur();
+//     let direction;
+
+//     if (action) {
+//         submitCheckbox.checked = false;
+//         document.getElementById('submit-btn').classList.remove('btn-validate');
+//         direction = formControl.previousElementSibling;
+//         form.style.transform = `translateY(-${$scroll -= 100}%)`;
+//     } else {
+//         direction = formControl.nextElementSibling;
+//         form.style.transform = `translateY(-${$scroll += 100}%)`;
+//     };
+
+//     direction.classList.add('active');
+//     setTimeout(() => {
+//         formControl.classList.remove('active');
+//         autoFocus(direction.querySelector('.main-input'));
+//     }, 200);
+// };

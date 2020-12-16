@@ -1,8 +1,7 @@
 :root {
     --error-color: #cd26f777;
-    --input-color: rgba(160, 160, 160, 0.25);
+    --input-color: rgba(219, 219, 219, 0.2);
 }
-
 
 * {
     margin: 0;
@@ -49,7 +48,7 @@ input[type=number] {
     display: grid;
     place-content: center;
     background-color: rgb(245, 245, 245);
-    color: rgb(236, 88, 88);
+    color: #ff515f;
 }
 
 .docs-lang {
@@ -117,7 +116,7 @@ input[type=number] {
 
 .lang button:hover,
 .lang button:focus {
-    border: 3px solid rgba(241, 64, 64, 0.9);
+    border: 3px solid #ff515f;
 }
 
 .lang-select {
@@ -231,7 +230,7 @@ h1 {
 
 .newsletter input {
     margin-right: 1.2vw;
-    visibility: hidden;
+    opacity: 0;
 }
 
 .newsletter .check {
@@ -249,16 +248,18 @@ h1 {
 }
 
 .newsletter:hover .check,
-.main-input:hover {
+.main-input:hover,
+.newsletter input:focus~.check {
     background-color: #d7d7d7;
 }
 
 .newsletter input:checked~.check {
-    background-color: #ff4141;
+    background-color: #ff515f;
     color: white;
 }
 
-.newsletter input:hover:checked~.check {
+.newsletter input:hover:checked~.check,
+.newsletter input:focus:checked~.check {
     background-color: #db0000;
 }
 
@@ -339,7 +340,8 @@ h1 {
     margin-bottom: 1vw;
     width: 5vw;
     height: 5vw;
-    color: var(--input-color);
+    background-color: var(--input-color);
+    color: rgba(180, 170, 170, 0.6);
     font-size: 2vw;
     pointer-events: none;
 }
@@ -367,13 +369,18 @@ h1 {
 .btn-validate,
 .back-btn {
     pointer-events: all;
-    background-color: #FF4654;
+    background-color: #ff515f;
     color: white;
 }
 
 .btn-validate:hover,
 .back-btn:hover {
-    background-color: #e4414e;
+    background-color: #db0000;
+}
+
+.btn-validate:focus,
+.back-btn:focus {
+    background-color: #db0000;
 }
 
 .btn-validate i {
@@ -450,10 +457,6 @@ input[type='date']:focus {
     background: pink;
 } */
 
-/* #birthday-btn {
-    margin-bottom: 30px;
-} */
-
 h2+p {
     margin: 15px 0 30px;
     color: #999;
@@ -515,7 +518,7 @@ h2+p {
     transform: translateY(-60%);
     right: 1vw;
     cursor: pointer;
-    opacity: 0;
+    opacity: .1;
 }
 
 .show-password:hover {
