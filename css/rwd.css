@@ -89,6 +89,16 @@
     }
 }
 
+@media (max-width: 600px) {
+    .form-wrap {
+        height: 38rem;
+    }
+
+    .form-control {
+        padding: 2.2rem 3.6rem 1rem;
+    }
+}
+
 @media (max-width: 992px) and (orientation:landscape) {
     :root {
         font-size: 2.9vw;

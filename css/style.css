@@ -181,7 +181,7 @@ h2+p {
     flex-flow: column nowrap;
     justify-content: space-around;
     align-items: center;
-    padding: 4rem 3.6rem 1rem;
+    padding: 2rem 3.6rem 1rem;
     visibility: hidden;
 }
 

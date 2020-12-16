@@ -1,0 +1,83 @@
+const lang_EN = {
+    ".lang-select": "EN",
+    "#support": "support",
+    "#privacy": "privacy notice",
+    "#terms-of-service": "terms of service",
+    ".docs p": "© 2020 RIOT GAMES. ALL RIGHTS RESERVED.",
+    "h1": "create an account",
+    ".page-email h2": "What's your email?",
+    ".page-email>a": "Have you seen original page?",
+    ".check-info": "Have you ever played Valorant? It's a really, really awesome game!",
+    ".form-socials small": "check out my other accounts:",
+    ".page-birthday h2": "When were you born?",
+    ".birthday-wrap > p": "Let's find out how old you are.",
+    ".username-wrap h2": "Choose a username",
+    ".username-wrap > p": "I will know how may i call you!",
+    ".username-wrap .js-label": "username",
+    ".password-wrap h2": "Choose a password",
+    ".password-wrap>p": "Make sure it's a good one BUT don't write a real one!",
+    "#password+.js-label": "password",
+    "#pass-strength span": "Must be Okay strength or better.",
+    "#pass-length span": "Password is at least 8 characters long.",
+    "#pass-number span": "Password contains at least one letter or number.",
+    "#confirm-password+.js-label": "confirm password",
+    ".message-wrap h2": "Any questions or feedback?",
+    ".message-wrap>p": "Feel free to write them below, i'll respond as soon as possible.",
+    ".message-wrap .js-label": "message",
+    ".submit-wrap h2": "Thanks for checking it out!",
+    ".checkout-msg": "By clicking submit button you agree to send me provided contact info and to get eventual reply from me. <br>I am not going to use your password but if i was in your place i would rather change it to something random :)"
+};
+
+const lang_PL = {
+    ".lang-select": "PL",
+    "#support": "pomoc",
+    "#privacy": "polityka prywatności",
+    "#terms-of-service": "warunki świadczenia usług",
+    ".docs p": "© 2020 RIOT GAMES. WSZYSTKIE PRAWA ZASTRZEŻONE.",
+    "h1": "stwórz konto",
+    ".page-email h2": "Jaki jest twój e-mail?",
+    ".page-email>a": "Widziałeś oryginalną stronę?",
+    ".check-info": "Czy grałeś już w Valorant? To na prawdę świetna gra, polecam!",
+    ".form-socials small": "więcej informacji o mnie:",
+    ".page-birthday h2": "Jaka jest data twoich urodzin?",
+    ".birthday-wrap > p": "Dowiedzmy się, ile masz lat.",
+    ".username-wrap h2": "Wybierz nazwę użytkownika",
+    ".username-wrap > p": "Będę wiedział jak się do Ciebie zwracać!",
+    ".username-wrap .js-label": "nazwa użytkownika",
+    ".password-wrap h2": "Wybierz hasło",
+    ".password-wrap>p": "Upewnij się że jest dobre ALE nie podawaj prawdziwego!",
+    "#password+.js-label": "hasło",
+    "#pass-strength span": "Siła hasła musi być co najmniej na poziomie „Okay”.",
+    "#pass-length span": "Minimalna liczba znaków: 8.",
+    "#pass-number span": "Hasło musi zawierać przynajmniej jedną literę lub cyfrę.",
+    "#confirm-password+.js-label": "powtórz hasło",
+    ".message-wrap h2": "Jakieś pytania albo feedback?",
+    ".message-wrap>p": "Napisz je poniżej, odezwę się kiedy tylko będę mógł.",
+    ".message-wrap .js-label": "wiadomość",
+    ".submit-wrap h2": "Dzięki za dotrwanie do końca!",
+    ".checkout-msg": "Klikająć poniższy przycisk wyrażasz zgodę na przesłanie podanych informacji oraz ewentualny kontakt z mojej strony. <br> Nie wykorzystam do niczego Twojego hasła ale na Twoim miejscu zmieniłbym je jednak na coś losowego :)"
+};
+
+const error_PL = {
+    "valid-date": "Musisz wpisać poprawną datę.",
+    "too-young": "Musisz mieć conajmniej 16 lat, cierpliwości. :)",
+    "message": "Nie możesz używać znaków specjalnych.",
+    "repeat-pass": "Musisz powtórzyć hasło.",
+    "too-short": "musi mieć conajmniej",
+    "too-long": "może mieć maksymalnie",
+    "characters": "znaków",
+    "only-let-num": "Dozwolone są tylko liczby i litery.",
+    "weak": "Za słabe."
+};
+
+const error_EN = {
+    "valid-date": "You must enter valid date.",
+    "too-young": "You must be at least 16 years old, be patient. :)",
+    "message": "You can't use special characters.",
+    "repeat-pass": "You need to repeat password",
+    "too-short": "must have at least",
+    "too-long": "might have max",
+    "characters": "characters",
+    "only-let-num": "Only letters and numbers are allowed.",
+    "weak": "Too weak."
+};

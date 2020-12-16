@@ -13,8 +13,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     changeLangBtn.addEventListener('click', changeLanguage);
     form.addEventListener('click', checkBtnClick);
-    console.log(window.screen.height)
-    console.log(window.screen.width)
 });
 
 //unfortunate global variables, not sure if its possible to get rid of them :)
@@ -74,19 +72,40 @@ const createNextBtns = () => {
 // allow user to change language on site
 const setLang = input => {
     wrapper.id = input;
-    fetch(`/lang/lang_${input}.json`)
-        .then(response => {
-            return response.json();
-        })
-        .then(data => {
-            for (const key in data) {
-                if (Object.hasOwnProperty.call(data, key)) {
-                    const text = data[key];
-                    const textContent = document.querySelector(key);
-                    textContent.innerHTML = text;
-                }
-            }
-        });
+    let data = {};
+
+    switch (input) {
+        case 'EN':
+            data = lang_EN;
+            break;
+        case 'PL':
+            data = lang_PL;
+    }
+
+    for (const key in data) {
+        if (Object.hasOwnProperty.call(data, key)) {
+            const text = data[key];
+            const textContent = document.querySelector(key);
+            textContent.innerHTML = text;
+        }
+    }
+
+
+    // following is wrong because i am using local JSON files :)
+
+    // fetch(`lang/lang_${input}.json`)
+    //     .then(response => {
+    //         return response.json();
+    //     })
+    //     .then(data => {
+    //         for (const key in data) {
+    //             if (Object.hasOwnProperty.call(data, key)) {
+    //                 const text = data[key];
+    //                 const textContent = document.querySelector(key);
+    //                 textContent.innerHTML = text;
+    //             }
+    //         }
+    //     });
     getErrorLang(input);
 };
 
@@ -101,17 +120,27 @@ const changeLanguage = e => {
 
 //change language of dynamically added error msgs
 const getErrorLang = lang => {
-    fetch(`/lang/error_${lang}.json`)
-        .then(response => {
-            return response.json();
-        })
-        .then(data => {
-            for (const key in data) {
-                if (Object.hasOwnProperty.call(data, key)) {
-                    $errorLangPack = data;
-                };
-            };
-        });
+    switch (lang) {
+        case 'EN':
+            $errorLangPack = error_EN;
+            break;
+        case 'PL':
+            $errorLangPack = error_PL;
+    };
+
+    // again, problem with local json
+
+    // fetch(`lang/error_${lang}.json`)
+    //     .then(response => {
+    //         return response.json();
+    //     })
+    //     .then(data => {
+    //         for (const key in data) {
+    //             if (Object.hasOwnProperty.call(data, key)) {
+    //                 $errorLangPack = data;
+    //             };
+    //         };
+    //     });
 };
 
 const setErrorMsg = input => {
