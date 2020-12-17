@@ -222,12 +222,13 @@ const setBirthDate = input => {
             break;
     };
 
-    if ($age['year'] < 1000) {
-        return;
-    }
-
     let date = `${$age['year']}-${$age['month']}-${$age['day']}`;
     console.log(date)
+
+    if ($age['year'] < 1800) {
+        return calcAge(birthdate, '1800-01-01');
+    };
+
     calcAge(birthdate, date);
 };
 
@@ -467,4 +468,3 @@ const focusOnDay = input => {
         };
     };
 };
-
