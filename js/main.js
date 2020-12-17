@@ -22,7 +22,11 @@ document.addEventListener('DOMContentLoaded', () => {
 //unfortunate global variables, not sure if its possible to get rid of them :)
 let $scroll = 0;
 let $errorLangPack = {};
-let $age = [];
+let $age = {
+    year: '',
+    month: '',
+    day: ''
+};
 
 const form = document.getElementById('form');
 const username = document.getElementById('username');
@@ -177,6 +181,77 @@ const showResult = (input, msg, logic) => {
     basicValidator(input, logic);
 };
 
+const checkEmail = input => {
+    const re = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+
+    if (re.test(String(input.value).trim())) {
+        basicValidator(input, true);
+    }
+    else {
+        basicValidator(input, false);
+    };
+};
+
+const setBirthDate = input => {
+    const hasNumbers = /\d/.test(input.key);
+
+    if (!hasNumbers) {
+        return;
+    };
+
+    const checkNumberLength = (input, max, outputID) => {
+        const actualInput = input.target;
+
+        if (actualInput.value.length >= max) {
+            document.getElementById(outputID).select();
+        };
+    };
+
+    switch (input.target.id) {
+        case 'day':
+            $age['day'] = input.target.value;
+            checkNumberLength(input, 2, 'month');
+            break;
+        case 'month':
+            $age[input.target.id] = input.target.value;
+            checkNumberLength(input, 2, 'year');
+            break;
+        case 'year':
+            $age[input.target.id] = input.target.value;
+            checkNumberLength(input, 4, 'year');
+            break;
+    };
+
+    if ($age['year'] < 1000) {
+        return;
+    }
+
+    let date = `${$age['year']}-${$age['month']}-${$age['day']}`;
+    console.log(date)
+    calcAge(birthdate, date);
+};
+
+const calcAge = (input, date) => {
+    // wymagany format : "1970-01-01" ;
+    const dateOfBirth = new Date(date);
+    const today = new Date();
+
+    console.log(dateOfBirth);
+
+    const age = ((today - dateOfBirth) / 31557600000).toFixed(2);
+    dateOfBirth.max = new Date().toISOString().split("T")[0];
+
+    console.log(age);
+
+    if (age > 130 || age < 2 || age == 'NaN') {
+        showResult(input, setErrorMsg("valid-date"), false);
+    } else if (age < 16) {
+        showResult(input, setErrorMsg("too-young"), false);
+    } else {
+        showResult(input, '', true);
+    };
+};
+
 const checkLength = (input, min, max) => {
     if (input.value.length < min) {
         showResult(input, `${getFieldName(input)} ${setErrorMsg("too-short")} ${min} ${setErrorMsg("characters")}.`)
@@ -194,43 +269,6 @@ const checkUsername = (input, min, max) => {
         checkLength(input, min, max)
     } else {
         showResult(input, setErrorMsg("only-let-num"));
-    };
-};
-
-const checkEmail = input => {
-    const re = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-
-    if (re.test(String(input.value).trim())) {
-        basicValidator(input, true);
-    }
-    else {
-        basicValidator(input, false);
-    };
-};
-
-const setBirthDate = input => {
-    const actualInput = input.target;
-    // $age : tablica gdzie musisz pushować czasy
-    console.log(actualInput);
-};
-
-const calcAge = date => {
-    // wymagany format : "1970-01-01" ;
-    const dateOfBirth = new Date(date);
-    const today = new Date();
-    console.log(dateOfBirth)
-
-    const age = ((today - dateOfBirth) / 31557600000).toFixed(2);
-    dateOfBirth.max = new Date().toISOString().split("T")[0];
-
-    if (age === 'NaN') {
-        return
-    } else if (age > 130 || age < 2) {
-        showResult(date, setErrorMsg("valid-date"), false);
-    } else if (age < 16) {
-        showResult(date, setErrorMsg("too-young"), false);
-    } else {
-        showResult(date, '', true);
     };
 };
 
@@ -419,13 +457,13 @@ const focusOnDay = input => {
     const birthDate = document.querySelector('.birthdate')
 
     if (input.type === 'focus') {
-        birthDate.classList.toggle('show-date');
-        birthDate.classList.toggle('hide-date');
+        birthDate.classList.add('show-date');
+        birthDate.classList.remove('hide-date');
         dayInput.focus();
     } else {
         if (dayInput.value === '') {
-            birthDate.classList.toggle('show-date');
-            birthDate.classList.toggle('hide-date');
+            birthDate.classList.remove('show-date');
+            birthDate.classList.add('hide-date');
         };
     };
 };

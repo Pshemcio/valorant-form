@@ -602,6 +602,11 @@ input[type='date']:focus {
     flex-flow: row nowrap;
     justify-content: space-between;
     align-items: center;
+    border: 2px solid transparent;
+}
+
+.birthdate.error {
+    border: 2px solid var(--error-color);
 }
 
 .birthdate.hide-date {
@@ -636,6 +641,7 @@ input[type='date']:focus {
 .date-input {
     outline: none;
     border-radius: 0;
+    margin-bottom: 0;
 }
 
 .date-input::placeholder {
