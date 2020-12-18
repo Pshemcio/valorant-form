@@ -11,7 +11,7 @@ https://pshemcio.github.io/valorant-form/
 * [CSS3](https://developer.mozilla.org/pl/docs/Web/CSS)
 * [HTML5](https://developer.mozilla.org/pl/docs/HTML/HTML5) 
 
-## Authors
+## Author
 
 * **Przemysław Majka** - *Initial work* - [Pshemcio](https://github.com/Pshemcio)
 
