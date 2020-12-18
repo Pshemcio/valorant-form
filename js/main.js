@@ -203,6 +203,7 @@ const setBirthDate = input => {
         const actualInput = input.target;
 
         if (actualInput.value.length >= max) {
+            document.getElementById(outputID).focus();
             document.getElementById(outputID).select();
         };
     };
@@ -236,8 +237,6 @@ const calcAge = (input, date) => {
     // wymagany format : "1970-01-01" ;
     const dateOfBirth = new Date(date);
     const today = new Date();
-
-    console.log(dateOfBirth);
 
     const age = ((today - dateOfBirth) / 31557600000).toFixed(2);
     dateOfBirth.max = new Date().toISOString().split("T")[0];
