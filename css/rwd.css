@@ -143,17 +143,25 @@
 
 @media (max-width: 450px) {
     :root {
-        font-size: 3.3vw;
+        font-size: 3.6vw;
     }
 
     .error-msg {
         margin-top: 0;
     }
+
+    #message {
+        font-size: 1.1rem;
+    }
 }
 
 @media (max-width: 400px) {
     :root {
-        font-size: 3.2vw;
+        font-size: 3.9vw;
+    }
+
+    h1 {
+        font-size: 2rem;
     }
 }
 
