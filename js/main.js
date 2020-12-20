@@ -98,8 +98,8 @@ const setLang = input => {
             const text = data[key];
             const textContent = document.querySelector(key);
             textContent.innerHTML = text;
-        }
-    }
+        };
+    };
 
     getErrorLang(input);
 };
@@ -192,6 +192,23 @@ const checkEmail = input => {
     };
 };
 
+const calcAge = (input, date) => {
+    // wymagany format : "1970-01-01" ;
+    const dateOfBirth = new Date(date);
+    const today = new Date();
+
+    const age = ((today - dateOfBirth) / 31557600000).toFixed(2);
+    dateOfBirth.max = new Date().toISOString().split("T")[0];
+
+    if (age > 130 || age < 2 || age == 'NaN') {
+        showResult(input, setErrorMsg("valid-date"), false);
+    } else if (age < 16) {
+        showResult(input, setErrorMsg("too-young"), false);
+    } else {
+        showResult(input, '', true);
+    };
+};
+
 const setBirthDate = input => {
     const hasNumbers = /\d/.test(input.key);
 
@@ -231,25 +248,6 @@ const setBirthDate = input => {
     };
 
     calcAge(birthdate, date);
-};
-
-const calcAge = (input, date) => {
-    // wymagany format : "1970-01-01" ;
-    const dateOfBirth = new Date(date);
-    const today = new Date();
-
-    const age = ((today - dateOfBirth) / 31557600000).toFixed(2);
-    dateOfBirth.max = new Date().toISOString().split("T")[0];
-
-    console.log(age);
-
-    if (age > 130 || age < 2 || age == 'NaN') {
-        showResult(input, setErrorMsg("valid-date"), false);
-    } else if (age < 16) {
-        showResult(input, setErrorMsg("too-young"), false);
-    } else {
-        showResult(input, '', true);
-    };
 };
 
 const checkLength = (input, min, max) => {
@@ -358,9 +356,6 @@ const checkRequired = input => {
         case email:
             checkEmail(actualInput);
             break;
-        // case birthday:
-        //     calcAge(actualInput);
-        //     break;
         case username:
             checkUsername(actualInput, 5, 15);
             break;
@@ -452,6 +447,7 @@ const switchPage = (input, action) => {
     }, 200);
 };
 
+// immediately switch focus to day input after focus is made on birthday input
 const focusOnDay = input => {
     const dayInput = document.getElementById('day');
     const birthDate = document.querySelector('.birthdate')
@@ -460,10 +456,12 @@ const focusOnDay = input => {
         birthDate.classList.add('show-date');
         birthDate.classList.remove('hide-date');
         dayInput.focus();
+        birthday.classList.add('hideBirthday');
     } else {
         if (dayInput.value === '') {
             birthDate.classList.remove('show-date');
             birthDate.classList.add('hide-date');
+            birthday.classList.remove('hideBirthday');
         };
     };
 };

@@ -25,7 +25,11 @@ const lang_EN = {
     ".message-wrap>p": "Feel free to write them below, i'll respond as soon as possible.",
     ".message-wrap .js-label": "message",
     ".submit-wrap h2": "Thanks for checking it out!",
-    ".checkout-msg": "By clicking submit button you agree to send me provided contact info and to get eventual reply from me. <br>I am not going to use your password but if i was in your place i would rather change it to something random :)"
+    ".checkout-msg": "By clicking submit button you agree to send me provided contact info and to get eventual reply from me. <br>I am not going to use your password but if i was in your place i would rather change it to something random :)",
+    "#birthday+label": "birthday",
+    "#day+label": "day",
+    "#month+label": "month",
+    "#year+label": "year"
 };
 
 const lang_PL = {
@@ -55,7 +59,11 @@ const lang_PL = {
     ".message-wrap>p": "Napisz je poniżej, odezwę się kiedy tylko będę mógł.",
     ".message-wrap .js-label": "wiadomość",
     ".submit-wrap h2": "Dzięki za dotrwanie do końca!",
-    ".checkout-msg": "Klikająć poniższy przycisk wyrażasz zgodę na przesłanie podanych informacji oraz ewentualny kontakt z mojej strony. <br> Nie wykorzystam do niczego Twojego hasła ale na Twoim miejscu zmieniłbym je jednak na coś losowego :)"
+    ".checkout-msg": "Klikająć poniższy przycisk wyrażasz zgodę na przesłanie podanych informacji oraz ewentualny kontakt z mojej strony. <br> Nie wykorzystam do niczego Twojego hasła ale na Twoim miejscu zmieniłbym je jednak na coś losowego :)",
+    "#birthday+label": "data urodzenia",
+    "#day+label": "dzień",
+    "#month+label": "miesiąc",
+    "#year+label": "rok"
 };
 
 const error_PL = {
