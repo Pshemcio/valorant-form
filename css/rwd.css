@@ -105,7 +105,7 @@
     }
 }
 
-@media (max-width: 992px) and (orientation:landscape) {
+@media (min-width: 550px) and (max-width: 992px) and (orientation:landscape) {
     :root {
         font-size: 2.9vw;
     }
